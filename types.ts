@@ -66,6 +66,9 @@ export interface TranslationSet {
   raffleIdPlaceholder: string;
   raffleParticipate: string;
   raffleEnds: string;
+  // Favorites Screen
+  noFavoritesTitle: string;
+  noFavoritesDesc: string;
 }
 
 export interface LanguageOption {

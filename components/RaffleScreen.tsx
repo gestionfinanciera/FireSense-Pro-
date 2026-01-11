@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
 import { Language } from '../types';
-import { TRANSLATIONS } from '../constants';
+import { TRANSLATIONS, RAFFLE_END_DATE } from '../constants';
 
 interface RaffleScreenProps {
   language: Language;
@@ -92,9 +92,9 @@ const RaffleScreen: React.FC<RaffleScreenProps> = ({ language, onBack }) => {
           {text.raffleParticipate}
         </button>
 
-        {/* Ends Text */}
+        {/* Ends Text - Combinando traducción + constante directamente */}
         <p className="text-gray-500 font-bold uppercase text-sm tracking-wider">
-          {text.raffleEnds}
+          {text.raffleEnds} {RAFFLE_END_DATE}
         </p>
       </main>
 
