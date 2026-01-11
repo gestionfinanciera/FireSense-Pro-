@@ -6,6 +6,7 @@ import Dashboard from './components/Dashboard';
 import NewsDetail from './components/NewsDetail';
 import SensitivityMenu from './components/SensitivityMenu';
 import PremiumScreen from './components/PremiumScreen';
+import RaffleScreen from './components/RaffleScreen';
 
 const App: React.FC = () => {
   const [selectedLang, setSelectedLang] = useState<Language | null>(null);
@@ -14,6 +15,7 @@ const App: React.FC = () => {
   const [currentNews, setCurrentNews] = useState<NewsItem | null>(null);
   const [inSensitivityMenu, setInSensitivityMenu] = useState(false);
   const [inPremiumScreen, setInPremiumScreen] = useState(false);
+  const [inRaffleScreen, setInRaffleScreen] = useState(false);
 
   useEffect(() => {
     // Simulate initial asset loading
@@ -33,8 +35,11 @@ const App: React.FC = () => {
   };
 
   const handleCategoryClick = (category: string) => {
-    if (category === 'SENSIBILIDAD' || category === 'SENSITIVITY' || category === 'SENSIBILIDADE' || category === 'حساسية') {
+    const cat = category.toUpperCase();
+    if (cat === 'SENSIBILIDAD' || cat === 'SENSITIVITY' || cat === 'SENSIBILIDADE' || cat === 'حساسية') {
       setInSensitivityMenu(true);
+    } else if (cat === 'SORTEOS' || cat === 'RAFFLES' || cat === 'سحوبات') {
+      setInRaffleScreen(true);
     }
   };
 
@@ -53,6 +58,10 @@ const App: React.FC = () => {
 
   if (inPremiumScreen) {
     return <PremiumScreen language={selectedLang!} onBack={() => setInPremiumScreen(false)} />;
+  }
+
+  if (inRaffleScreen) {
+    return <RaffleScreen language={selectedLang!} onBack={() => setInRaffleScreen(false)} />;
   }
 
   if (currentNews) {

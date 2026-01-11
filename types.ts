@@ -53,6 +53,19 @@ export interface TranslationSet {
   premiumPrice: string;
   premiumBuy: string;
   premiumDisclaimer: string;
+  // Raffle Screen
+  raffleRulesTitle: string;
+  raffleRulesDesc: string;
+  raffleStep1: string;
+  raffleStep2: string;
+  raffleStep3: string;
+  raffleTicketLabel: string;
+  raffleWatchAd: string;
+  raffleYoutubeDesc: string;
+  raffleSubscribe: string;
+  raffleIdPlaceholder: string;
+  raffleParticipate: string;
+  raffleEnds: string;
 }
 
 export interface LanguageOption {

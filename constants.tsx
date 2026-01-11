@@ -16,23 +16,23 @@ export const MOCK_NEWS: NewsItem[] = [
     publishDate: '2026-01-06', 
     imageUrl: 'data:image/jpeg;base64,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) ',
     content: [
-      '🦂 Desata la Destrucción Escorpión de la EVO M1014 y deja que el caos se expanda con cada disparo.',
-      'Equipa tu Energía Cósmica o adéntrate en el Supervacío para demostrar que estás un paso más allá de tus enemigos. 🌌',
-      '❓ ¿Serás quien domine el cosmos?.',
-      '#FelicesFiestas2025 #DulcesSueños',
+      'Scorpion Destruction of the EVO M1014 and let chaos expand with every shot. 🦂',
+      'Equip your Cosmic Energy or step into the Supervoid to prove you are one step beyond your enemies. 🌌',
+      '❓ Will you be the one to dominate the cosmos?',
+      '#HappyHolidays2025 #SweetDreams',
     ]
   },
   {
     id: '2',
     title: '📕 ¡LA #AGENDASEMANAL ESTÁ AQUÍ! 📕',
-    excerpt: 'Despliega las alas prismáticas de los Angelicales Morados...',
+    excerpt: 'Deploy the prismatic wings of the Purple Angelics...',
     publishDate: '2025-12-30',
     imageUrl: 'https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&q=80&w=800',
     content: [
-      '🪽 Despliega las alas prismáticas de los Angelicales Morados✨ y entra al campo con el instinto feroz de un Lobo. 🐺.',
-      '🔥 Marca el ritmo de la batalla con la FAMAS HEARTROCKER y despide a tus enemigos Muerto de Risa.',
-      '❓ ¿Listo para dejarte llevar por el caos y la obsesión?.',
-      '#FelicesFiestas2025 #DulcesSueños.',
+      '🪽 Deploy the prismatic wings of the Purple Angelics✨ and enter the field with the fierce instinct of a Wolf. 🐺.',
+      '🔥 Set the rhythm of battle with the FAMAS HEARTROCKER and wave goodbye to your enemies while Laughing Out Loud.',
+      '❓ Ready to let yourself be carried away by chaos and obsession?',
+      '#HappyHolidays2025 #SweetDreams',
     ]
   }
 ];
@@ -79,7 +79,19 @@ export const TRANSLATIONS: Record<Language, TranslationSet> = {
     featNoAds: 'Sin anuncios',
     premiumPrice: 'Suscríbete por solo US$ 2,99 /Mensual',
     premiumBuy: 'COMPRA AHORA',
-    premiumDisclaimer: 'La suscripción se renovará automáticamente. Puedes cancelar en cualquier momento.'
+    premiumDisclaimer: 'La suscripción se renovará automáticamente. Puedes cancelar en cualquier momento.',
+    raffleRulesTitle: 'Reglas del sorteo',
+    raffleRulesDesc: 'Si deseas participar en los sorteos y ser uno de los ganadores, debes seguir los siguientes pasos.',
+    raffleStep1: 'Debes tener un Ticket',
+    raffleStep2: 'Ingresa tu ID del juego',
+    raffleStep3: 'Síguenos en YouTube',
+    raffleTicketLabel: 'Ticket: 0',
+    raffleWatchAd: 'Ver anuncio x1 ticket',
+    raffleYoutubeDesc: '¡Asegúrate de suscribirte a nuestro canal de YouTube para aumentar tus posibilidades de ganar en el sorteo!',
+    raffleSubscribe: 'Suscríbete',
+    raffleIdPlaceholder: 'Ingrese su ID',
+    raffleParticipate: 'Participar',
+    raffleEnds: 'Finaliza: 1/5/2025'
   },
   en: {
     title: 'Choose your language',
@@ -122,7 +134,19 @@ export const TRANSLATIONS: Record<Language, TranslationSet> = {
     featNoAds: 'No Ads',
     premiumPrice: 'Subscribe for only US$ 2.99 /Monthly',
     premiumBuy: 'BUY NOW',
-    premiumDisclaimer: 'Subscription will renew automatically. You can cancel at any time.'
+    premiumDisclaimer: 'Subscription will renew automatically. You can cancel at any time.',
+    raffleRulesTitle: 'Raffle Rules',
+    raffleRulesDesc: 'If you want to participate in the raffles and be one of the winners, you must follow these steps.',
+    raffleStep1: 'You must have a Ticket',
+    raffleStep2: 'Enter your game ID',
+    raffleStep3: 'Follow us on YouTube',
+    raffleTicketLabel: 'Ticket: 0',
+    raffleWatchAd: 'Watch ad x1 ticket',
+    raffleYoutubeDesc: 'Make sure to subscribe to our YouTube channel to increase your chances of winning!',
+    raffleSubscribe: 'Subscribe',
+    raffleIdPlaceholder: 'Enter your ID',
+    raffleParticipate: 'Participate',
+    raffleEnds: 'Ends: 1/5/2025'
   },
   pt: {
     title: 'Escolha seu idioma',
@@ -165,7 +189,19 @@ export const TRANSLATIONS: Record<Language, TranslationSet> = {
     featNoAds: 'Sem anúncios',
     premiumPrice: 'Assine por apenas US$ 2,99 /Mensal',
     premiumBuy: 'COMPRE AGORA',
-    premiumDisclaimer: 'A assinatura será renovada automaticamente. Você pode cancelar a qualquer momento.'
+    premiumDisclaimer: 'A assinatura será renovada automaticamente. Você pode cancelar a qualquer momento.',
+    raffleRulesTitle: 'Regras do sorteio',
+    raffleRulesDesc: 'Se você deseja participar dos sorteios e ser um dos vencedores, deve seguir os seguintes passos.',
+    raffleStep1: 'Você deve ter um Ticket',
+    raffleStep2: 'Insira o seu ID do jogo',
+    raffleStep3: 'Siga-nos no YouTube',
+    raffleTicketLabel: 'Ticket: 0',
+    raffleWatchAd: 'Ver anúncio x1 ticket',
+    raffleYoutubeDesc: 'Não se esqueça de se inscrever no nosso canal do YouTube para aumentar suas chances de ganhar!',
+    raffleSubscribe: 'Inscrever-se',
+    raffleIdPlaceholder: 'Insira o seu ID',
+    raffleParticipate: 'Participar',
+    raffleEnds: 'Termina: 1/5/2025'
   },
   ar: {
     title: 'اختر لغتك',
@@ -208,6 +244,18 @@ export const TRANSLATIONS: Record<Language, TranslationSet> = {
     featNoAds: 'بدون إعلانات',
     premiumPrice: 'اشترك مقابل 2.99 دولارًا أمريكيًا فقط شهريًا',
     premiumBuy: 'اشتر الآن',
-    premiumDisclaimer: 'سيتم تجديد الاشتراك تلقائيًا. يمكنك الإلغاء في أي وقت.'
+    premiumDisclaimer: 'سيتم تجديد الاشتراك تلقائيًا. يمكنك الإلغاء في أي وقت.',
+    raffleRulesTitle: 'قواعد السحب',
+    raffleRulesDesc: 'إذا كنت ترغب في المشاركة في السحوبات وتكون أحد الفائزين، فيجب عليك اتباع هذه الخطوات.',
+    raffleStep1: 'يجب أن يكون لديك تذكرة',
+    raffleStep2: 'أدخل معرف اللعبة الخاص بك',
+    raffleStep3: 'تابعنا على يوتيوب',
+    raffleTicketLabel: 'التذاكر: 0',
+    raffleWatchAd: 'مشاهدة الإعلان x1 تذكرة',
+    raffleYoutubeDesc: 'تأكد من الاشتراك في قناتنا على يوتيوب لزيادة فرصك في الفوز بالقرعة!',
+    raffleSubscribe: 'اشتراك',
+    raffleIdPlaceholder: 'أدخل هويتك',
+    raffleParticipate: 'مشاركة',
+    raffleEnds: 'ينتهي في: 1/5/2025'
   }
 };
