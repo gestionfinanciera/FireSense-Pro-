@@ -10,13 +10,14 @@ interface DashboardProps {
   onBack: () => void;
   onNewsClick: (news: NewsItem) => void;
   savedConfigs: SavedConfig[];
+  onDeleteConfig: (id: string) => void;
   onCategoryClick?: (category: string) => void;
   onPremiumClick?: () => void;
 }
 
 type Tab = 'inicio' | 'noticias' | 'favoritos' | 'ajustes';
 
-const Dashboard: React.FC<DashboardProps> = ({ language, onBack, onNewsClick, savedConfigs, onCategoryClick, onPremiumClick }) => {
+const Dashboard: React.FC<DashboardProps> = ({ language, onBack, onNewsClick, savedConfigs, onDeleteConfig, onCategoryClick, onPremiumClick }) => {
   const [activeTab, setActiveTab] = useState<Tab>('inicio');
   const text = TRANSLATIONS[language];
   const isArabic = language === 'ar';
@@ -42,7 +43,7 @@ const Dashboard: React.FC<DashboardProps> = ({ language, onBack, onNewsClick, sa
   const renderContent = () => {
     switch(activeTab) {
       case 'favoritos':
-        return <FavoritesScreen language={language} savedConfigs={savedConfigs} />;
+        return <FavoritesScreen language={language} savedConfigs={savedConfigs} onDeleteConfig={onDeleteConfig} />;
       case 'noticias':
         return (
           <div className="flex-1 overflow-y-auto px-0 pb-6 animate-in fade-in duration-300">

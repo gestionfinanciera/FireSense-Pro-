@@ -42,6 +42,10 @@ const App: React.FC = () => {
     setSavedConfigs(prev => [config, ...prev]);
   };
 
+  const handleDeleteConfig = (id: string) => {
+    setSavedConfigs(prev => prev.filter(config => config.id !== id));
+  };
+
   const handleCategoryClick = (category: string) => {
     const cat = category.toUpperCase();
     if (cat === 'SENSIBILIDAD' || cat === 'SENSITIVITY' || cat === 'SENSIBILIDADE' || cat === 'حساسية') {
@@ -100,6 +104,7 @@ const App: React.FC = () => {
         onNewsClick={handleNewsSelect}
         onCategoryClick={handleCategoryClick}
         savedConfigs={savedConfigs}
+        onDeleteConfig={handleDeleteConfig}
         onPremiumClick={() => setInPremiumScreen(true)}
       />
     </div>
