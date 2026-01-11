@@ -10,20 +10,20 @@
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #f3f4f6;
+            background-color: #ffffff;
             color: #111827;
             overflow-x: hidden;
         }
-        .neon-text-red {
-            text-shadow: 0 0 8px rgba(255, 30, 30, 0.4);
-            color: #FF1E1E;
+        .neon-text-purple {
+            text-shadow: 0 0 8px rgba(109, 40, 217, 0.4);
+            color: #6d28d9;
         }
-        .neon-bg-red {
-            background: #FF1E1E;
-            box-shadow: 0 4px 15px rgba(255, 30, 30, 0.3);
+        .neon-bg-purple {
+            background: #6d28d9;
+            box-shadow: 0 4px 15px rgba(109, 40, 217, 0.3);
         }
         .header-gradient {
-            background: linear-gradient(to bottom, #FF1E1E, #D10000);
+            background: linear-gradient(to bottom, #6d28d9, #5b21b6);
         }
         .category-card {
             background: #ffffff;
@@ -32,13 +32,22 @@
         .category-card:active {
             transform: scale(0.95);
         }
-        /* Custom scrollbar for horizontal news */
         .hide-scrollbar::-webkit-scrollbar {
             display: none;
         }
         .hide-scrollbar {
             -ms-overflow-style: none;
             scrollbar-width: none;
+        }
+        /* Animación suave para cambios de pestaña */
+        .tab-content-enter {
+            opacity: 0;
+            transform: translateY(10px);
+        }
+        .tab-content-enter-active {
+            opacity: 1;
+            transform: translateY(0);
+            transition: opacity 300ms, transform 300ms;
         }
     </style>
 <script type="importmap">

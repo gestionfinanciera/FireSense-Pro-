@@ -8,6 +8,7 @@ import SensitivityMenu from './components/SensitivityMenu';
 import PremiumScreen from './components/PremiumScreen';
 import RaffleScreen from './components/RaffleScreen';
 import GeneratorScreen from './components/GeneratorScreen';
+import PetScreen from './components/PetScreen';
 
 const App: React.FC = () => {
   const [selectedLang, setSelectedLang] = useState<Language | null>(null);
@@ -18,6 +19,7 @@ const App: React.FC = () => {
   const [inPremiumScreen, setInPremiumScreen] = useState(false);
   const [inRaffleScreen, setInRaffleScreen] = useState(false);
   const [inGeneratorScreen, setInGeneratorScreen] = useState(false);
+  const [inPetScreen, setInPetScreen] = useState(false);
   
   const [savedConfigs, setSavedConfigs] = useState<SavedConfig[]>([]);
 
@@ -54,6 +56,8 @@ const App: React.FC = () => {
       setInRaffleScreen(true);
     } else if (cat === 'GENERADOR' || cat === 'GENERATOR' || cat === 'GERADOR' || cat === 'مولد') {
       setInGeneratorScreen(true);
+    } else if (cat === 'MASCOTA' || cat === 'PET' || cat === 'حيwan أليف') {
+      setInPetScreen(true);
     }
   };
 
@@ -76,6 +80,10 @@ const App: React.FC = () => {
 
   if (inRaffleScreen) {
     return <RaffleScreen language={selectedLang!} onBack={() => setInRaffleScreen(false)} />;
+  }
+
+  if (inPetScreen) {
+    return <PetScreen language={selectedLang!} onBack={() => setInPetScreen(false)} />;
   }
 
   if (inGeneratorScreen) {

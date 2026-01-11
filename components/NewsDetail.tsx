@@ -26,23 +26,29 @@ const NewsDetail: React.FC<NewsDetailProps> = ({ news, language, onBack }) => {
         <h1 className="text-white font-black text-xl tracking-tight uppercase">{text.noticias}</h1>
       </header>
 
-      {/* Main Image - Ahora se muestra completa */}
-      <div className="w-full relative bg-gray-100 flex justify-center items-start">
-        <img 
-          src={news.imageUrl} 
-          alt={news.title} 
-          className="w-full h-auto block shadow-sm"
-        />
-      </div>
+      {/* Main Banner Image - Se ajusta para ver la imagen COMPLETA */}
+      {news.imageUrl && (
+        <div className="w-full bg-gray-100 flex items-center justify-center overflow-hidden border-b border-gray-100">
+           <img 
+             src={news.imageUrl} 
+             alt={news.title} 
+             className="w-full h-auto object-contain max-h-[70vh]"
+           />
+        </div>
+      )}
 
       {/* Content */}
-      <div className="px-6 py-8 bg-white relative z-10 rounded-t-[2rem] -mt-6">
-        <div className="w-12 h-1.5 bg-gray-200 rounded-full mx-auto mb-6"></div>
+      <div className="px-6 py-8 bg-white relative z-10">
+        <div className="flex items-center space-x-2 rtl:space-x-reverse mb-6">
+           <div className="w-8 h-1 bg-[#FF1E1E] rounded-full"></div>
+           <span className="text-[10px] text-[#FF1E1E] font-black uppercase tracking-[0.2em]">Agenda Oficial</span>
+        </div>
+        
         <h2 className="text-2xl font-black text-gray-900 leading-tight mb-2 uppercase tracking-tight">
           {news.title}
         </h2>
-        <p className="text-gray-400 text-sm font-bold mb-8">
-          {getRelativeDate(news.publishDate, language)}
+        <p className="text-gray-400 text-sm font-bold mb-8 flex items-center">
+          <span className="mr-1">📅</span> {getRelativeDate(news.publishDate, language)}
         </p>
 
         <div className="space-y-6">
@@ -54,8 +60,8 @@ const NewsDetail: React.FC<NewsDetailProps> = ({ news, language, onBack }) => {
         </div>
       </div>
 
-      {/* Extra spacing for bottom nav safety */}
-      <div className="h-20"></div>
+      {/* Extra spacing for safety */}
+      <div className="h-24"></div>
     </div>
   );
 };

@@ -28,6 +28,15 @@ export interface NewsItem {
   imageUrl: string;
 }
 
+export interface Pet {
+  id: string;
+  name: string;
+  imageUrl: string;
+  abilityName: string;
+  description: string;
+  abilityEffect: string;
+}
+
 export interface TranslationSet {
   title: string;
   subtitle: string;
