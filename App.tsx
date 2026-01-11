@@ -7,6 +7,7 @@ import NewsDetail from './components/NewsDetail';
 import SensitivityMenu from './components/SensitivityMenu';
 import PremiumScreen from './components/PremiumScreen';
 import RaffleScreen from './components/RaffleScreen';
+import GeneratorScreen from './components/GeneratorScreen';
 
 const App: React.FC = () => {
   const [selectedLang, setSelectedLang] = useState<Language | null>(null);
@@ -16,6 +17,7 @@ const App: React.FC = () => {
   const [inSensitivityMenu, setInSensitivityMenu] = useState(false);
   const [inPremiumScreen, setInPremiumScreen] = useState(false);
   const [inRaffleScreen, setInRaffleScreen] = useState(false);
+  const [inGeneratorScreen, setInGeneratorScreen] = useState(false);
 
   useEffect(() => {
     // Simulate initial asset loading
@@ -40,6 +42,8 @@ const App: React.FC = () => {
       setInSensitivityMenu(true);
     } else if (cat === 'SORTEOS' || cat === 'RAFFLES' || cat === 'سحوبات') {
       setInRaffleScreen(true);
+    } else if (cat === 'GENERADOR' || cat === 'GENERATOR' || cat === 'GERADOR' || cat === 'مولد') {
+      setInGeneratorScreen(true);
     }
   };
 
@@ -62,6 +66,10 @@ const App: React.FC = () => {
 
   if (inRaffleScreen) {
     return <RaffleScreen language={selectedLang!} onBack={() => setInRaffleScreen(false)} />;
+  }
+
+  if (inGeneratorScreen) {
+    return <GeneratorScreen language={selectedLang!} onBack={() => setInGeneratorScreen(false)} />;
   }
 
   if (currentNews) {

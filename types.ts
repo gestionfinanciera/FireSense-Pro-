@@ -69,6 +69,20 @@ export interface TranslationSet {
   // Favorites Screen
   noFavoritesTitle: string;
   noFavoritesDesc: string;
+  // Generator Screen
+  genUsingDpi: string;
+  genScreen: string;
+  genGeneral: string;
+  genRedDot: string;
+  gen2x: string;
+  gen4x: string;
+  genSniper: string;
+  gen360: string;
+  genButton: string;
+  genDpi: string;
+  genCoins: string;
+  genRegenerate: string;
+  genSave: string;
 }
 
 export interface LanguageOption {
