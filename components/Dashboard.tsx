@@ -1,88 +1,145 @@
 
 import React from 'react';
-import { Language } from '../types';
-import { TRANSLATIONS } from '../constants';
+import { Language, NewsItem } from '../types';
+import { TRANSLATIONS, MOCK_NEWS } from '../constants';
+import { getRelativeDate } from '../utils';
 
 interface DashboardProps {
   language: Language;
   onBack: () => void;
+  onNewsClick: (news: NewsItem) => void;
 }
 
-const Dashboard: React.FC<DashboardProps> = ({ language, onBack }) => {
+const Dashboard: React.FC<DashboardProps> = ({ language, onBack, onNewsClick }) => {
   const text = TRANSLATIONS[language];
   const isArabic = language === 'ar';
 
+  const categories = [
+    { name: text.catSensibilidad, icon: '🔧', color: 'bg-red-100 text-red-500' },
+    { name: text.catArmas, icon: '🔫', color: 'bg-purple-100 text-purple-500' },
+    { name: text.catHabilidades, icon: '👊', color: 'bg-orange-100 text-orange-500' },
+    { name: text.catGenerador, icon: '♻️', color: 'bg-green-100 text-green-500' },
+    { name: text.catHud, icon: '🎯', color: 'bg-pink-100 text-pink-500' },
+    { name: text.catMascota, icon: '🐾', color: 'bg-lime-100 text-lime-500' },
+    { name: text.catPersonajes, icon: '🎭', color: 'bg-cyan-100 text-cyan-500' },
+    { name: text.catSorteos, icon: '🎡', color: 'bg-indigo-100 text-indigo-500' },
+  ];
+
+  const devices = [
+    { name: 'Vivo V5', color: 'border-l-blue-500' },
+    { name: 'Motorola Mot...', color: 'border-l-blue-500' },
+    { name: 'Tcl Plex', color: 'border-l-purple-500' },
+    { name: 'Oukitel Wp5...', color: 'border-l-purple-500' },
+  ];
+
   return (
-    <div className={`min-h-screen flex flex-col p-6 bg-[#0a0a0a] ${isArabic ? 'text-right' : 'text-left'}`} dir={isArabic ? 'rtl' : 'ltr'}>
-      {/* Header */}
-      <header className="flex items-center justify-between mb-10">
-        <div>
-          <h2 className="text-[#00E5FF] font-black text-2xl tracking-tighter">FIRESENSE PRO+</h2>
-          <p className="text-gray-500 text-xs font-medium uppercase tracking-widest">{text.active} v2.4.0</p>
-        </div>
-        <button 
-          onClick={onBack}
-          className="p-3 rounded-xl glass-panel hover:bg-white/5 transition-colors border-[#00E5FF]/20"
-        >
-           <svg className="w-6 h-6 text-[#00E5FF]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
-             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-           </svg>
-        </button>
-      </header>
-
-      {/* Hero / Main Status */}
-      <section className="glass-panel p-8 rounded-[2rem] border-[#00E5FF]/20 mb-8 overflow-hidden relative">
-        <div className="absolute -top-10 -right-10 w-40 h-40 bg-[#00E5FF]/20 rounded-full blur-[40px]"></div>
-        <h1 className="text-3xl font-extrabold mb-2">{text.welcome}</h1>
-        <p className="text-gray-400 mb-6">{text.dashboard}</p>
-        
-        <div className="flex items-center space-x-4 rtl:space-x-reverse">
-          <div className="flex-1 h-2 bg-gray-800 rounded-full overflow-hidden">
-            <div className="h-full w-4/5 neon-bg-blue rounded-full"></div>
-          </div>
-          <span className="text-[#00E5FF] font-bold text-sm">80% Optimized</span>
-        </div>
-      </section>
-
-      {/* Action Cards */}
-      <div className="grid grid-cols-2 gap-4 flex-1">
-        <div className="glass-panel p-6 rounded-3xl border-[#00E5FF]/10 flex flex-col justify-between hover:border-[#00E5FF]/40 transition-all cursor-pointer group">
-          <div className="w-12 h-12 rounded-2xl bg-[#00E5FF]/10 flex items-center justify-center text-[#00E5FF] mb-4 group-hover:scale-110 transition-transform">
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-            </svg>
-          </div>
-          <div>
-            <h3 className="font-bold text-lg mb-1">{text.sensitivity}</h3>
-            <p className="text-gray-500 text-xs">Ajustes pro tácticos</p>
-          </div>
-        </div>
-
-        <div className="glass-panel p-6 rounded-3xl border-[#00E5FF]/10 flex flex-col justify-between hover:border-[#00E5FF]/40 transition-all cursor-pointer group">
-          <div className="w-12 h-12 rounded-2xl bg-[#00E5FF]/10 flex items-center justify-center text-[#00E5FF] mb-4 group-hover:scale-110 transition-transform">
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-            </svg>
-          </div>
-          <div>
-            <h3 className="font-bold text-lg mb-1">{text.optimization}</h3>
-            <p className="text-gray-500 text-xs">Limpieza de caché RAM</p>
-          </div>
+    <div className={`min-h-screen flex flex-col bg-[#f3f4f6] pb-24`} dir={isArabic ? 'rtl' : 'ltr'}>
+      {/* Top Header */}
+      <div className="header-gradient pt-12 pb-6 px-6 rounded-b-[2rem] shadow-lg relative overflow-hidden">
+        <div className="flex items-center justify-center relative z-10">
+          <button onClick={onBack} className="absolute left-0 text-white p-2">
+            <span className="text-xl">👑</span>
+          </button>
+          <h1 className="text-white font-bold text-xl">FireSense Pro+</h1>
         </div>
       </div>
 
-      {/* Bottom Nav Simulation */}
-      <nav className="mt-8 py-4 px-8 glass-panel rounded-full flex justify-between items-center border-[#00E5FF]/10">
-        <button className="text-[#00E5FF] drop-shadow-[0_0_8px_rgba(0,229,255,0.6)]">
-          <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" /></svg>
-        </button>
-        <button className="text-gray-500 hover:text-[#00E5FF] transition-colors">
-          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" /></svg>
-        </button>
-        <button className="text-gray-500 hover:text-[#00E5FF] transition-colors">
-          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg>
-        </button>
+      {/* Noticias Section */}
+      <section className="mt-6 px-6">
+        <h2 className="text-xl font-black mb-4 text-gray-900 uppercase tracking-tight">{text.noticias}</h2>
+        <div className="flex space-x-4 overflow-x-auto hide-scrollbar pb-2">
+          {MOCK_NEWS.map((news) => (
+            <button 
+              key={news.id} 
+              onClick={() => onNewsClick(news)}
+              className="min-w-[85%] bg-white rounded-2xl shadow-sm border border-gray-100 p-3 flex text-left rtl:text-right"
+            >
+              <div className="w-24 h-24 bg-gray-100 rounded-xl overflow-hidden flex-shrink-0">
+                 <img src={news.imageUrl} alt="news" className="w-full h-full object-cover" />
+              </div>
+              <div className="ml-4 rtl:mr-4 rtl:ml-0 flex flex-col justify-center">
+                <span className="text-sm font-black text-gray-800 leading-tight uppercase line-clamp-2">{news.title}</span>
+                <span className="text-xs text-gray-400 mt-1 line-clamp-1">{news.excerpt}</span>
+                <span className="text-[10px] text-gray-400 mt-2 flex items-center">
+                  <span className="mr-1">🕒</span> {getRelativeDate(news.publishDate, language)}
+                </span>
+              </div>
+            </button>
+          ))}
+        </div>
+      </section>
+
+      {/* Categorías Grid */}
+      <section className="mt-8 px-6">
+        <div className="bg-white rounded-[2rem] p-6 shadow-sm border border-gray-100">
+          <h2 className="text-xl font-black mb-6 text-gray-900 uppercase tracking-tight">{text.categorias}</h2>
+          <div className="grid grid-cols-4 gap-y-8 gap-x-2">
+            {categories.map((cat, i) => (
+              <div key={i} className="flex flex-col items-center">
+                <div className={`w-14 h-14 rounded-2xl ${cat.color} flex items-center justify-center text-2xl shadow-sm category-card`}>
+                  {cat.icon}
+                </div>
+                <span className="text-[9px] font-black text-gray-800 mt-2 text-center uppercase leading-none px-1">
+                  {cat.name}
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Sensibilidades Section */}
+      <section className="mt-8 px-6">
+        <div className="flex justify-between items-center mb-4">
+          <h2 className="text-xl font-black text-gray-900 uppercase tracking-tight">{text.sensibilidades}</h2>
+          <button className="text-gray-900 font-bold text-sm underline">{text.verTodas}</button>
+        </div>
+        <div className="grid grid-cols-2 gap-3">
+          {devices.map((device, i) => (
+            <div key={i} className={`bg-white p-4 rounded-xl shadow-sm border border-gray-100 border-l-4 ${device.color} flex justify-between items-center transition-all active:scale-95`}>
+              <span className="font-bold text-gray-800 text-sm truncate pr-2">{device.name}</span>
+              <svg className="w-4 h-4 text-gray-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M9 5l7 7-7 7" />
+              </svg>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Bottom Navigation */}
+      <nav className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-100 flex justify-around items-center py-3 px-6 pb-6 z-50">
+        <div className="flex flex-col items-center group">
+          <div className="bg-red-50 p-2 rounded-2xl mb-1 group-hover:bg-red-100 transition-colors">
+            <svg className="w-6 h-6 text-[#FF1E1E]" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" />
+            </svg>
+          </div>
+          <span className="text-[10px] font-black text-gray-900 uppercase">{text.inicio}</span>
+        </div>
+        <div className="flex flex-col items-center opacity-40 hover:opacity-100 transition-opacity">
+          <div className="p-2 mb-1">
+            <svg className="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
+            </svg>
+          </div>
+          <span className="text-[10px] font-black text-gray-900 uppercase">{text.noticias}</span>
+        </div>
+        <div className="flex flex-col items-center opacity-40 hover:opacity-100 transition-opacity">
+          <div className="p-2 mb-1">
+            <svg className="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+            </svg>
+          </div>
+          <span className="text-[10px] font-black text-gray-900 uppercase">{text.favoritos}</span>
+        </div>
+        <div className="flex flex-col items-center opacity-40 hover:opacity-100 transition-opacity">
+          <div className="p-2 mb-1">
+            <svg className="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+            </svg>
+          </div>
+          <span className="text-[10px] font-black text-gray-900 uppercase">{text.ajustes}</span>
+        </div>
       </nav>
     </div>
   );
