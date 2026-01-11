@@ -24,7 +24,6 @@ const App: React.FC = () => {
   const [savedConfigs, setSavedConfigs] = useState<SavedConfig[]>([]);
 
   useEffect(() => {
-    // Simulate initial asset loading
     const timer = setTimeout(() => {
       setIsLoading(false);
     }, 1200);
@@ -64,7 +63,7 @@ const App: React.FC = () => {
   if (isLoading) {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center bg-white">
-        <div className="w-16 h-16 border-4 border-red-100 border-t-[#FF1E1E] rounded-full animate-spin mb-4 shadow-[0_0_15px_rgba(255,30,30,0.1)]"></div>
+        <div className="w-16 h-16 border-4 border-red-50 border-t-[#FF1E1E] rounded-full animate-spin mb-4 shadow-[0_0_15px_rgba(255,30,30,0.1)]"></div>
         <h1 className="text-[#FF1E1E] font-black text-xl tracking-widest animate-pulse">FIRESENSE PRO+</h1>
       </div>
     );
@@ -74,47 +73,39 @@ const App: React.FC = () => {
     return <LanguageSelector onConfirm={handleLanguageSelect} />;
   }
 
-  if (inPremiumScreen) {
-    return <PremiumScreen language={selectedLang!} onBack={() => setInPremiumScreen(false)} />;
-  }
-
-  if (inRaffleScreen) {
-    return <RaffleScreen language={selectedLang!} onBack={() => setInRaffleScreen(false)} />;
-  }
-
-  if (inPetScreen) {
-    return <PetScreen language={selectedLang!} onBack={() => setInPetScreen(false)} />;
-  }
-
-  if (inGeneratorScreen) {
-    return (
-      <GeneratorScreen 
-        language={selectedLang!} 
-        onBack={() => setInGeneratorScreen(false)} 
-        onSaveConfig={handleSaveConfig}
-      />
-    );
-  }
-
-  if (currentNews) {
-    return <NewsDetail news={currentNews} language={selectedLang!} onBack={() => setCurrentNews(null)} />;
-  }
-
-  if (inSensitivityMenu) {
-    return <SensitivityMenu language={selectedLang!} onBack={() => setInSensitivityMenu(false)} />;
-  }
+  const commonProps = {
+    language: selectedLang!
+  };
 
   return (
-    <div className={`min-h-screen bg-[#f3f4f6] text-gray-900 selection:bg-[#FF1E1E] selection:text-white overflow-x-hidden`}>
-      <Dashboard 
-        language={selectedLang!} 
-        onBack={() => setAppReady(false)} 
-        onNewsClick={handleNewsSelect}
-        onCategoryClick={handleCategoryClick}
-        savedConfigs={savedConfigs}
-        onDeleteConfig={handleDeleteConfig}
-        onPremiumClick={() => setInPremiumScreen(true)}
-      />
+    <div className="min-h-screen bg-[#f3f4f6] text-gray-900 selection:bg-[#FF1E1E] selection:text-white overflow-x-hidden">
+      {inPremiumScreen && <PremiumScreen {...commonProps} onBack={() => setInPremiumScreen(false)} />}
+      {!inPremiumScreen && inRaffleScreen && <RaffleScreen {...commonProps} onBack={() => setInRaffleScreen(false)} />}
+      {!inPremiumScreen && !inRaffleScreen && inPetScreen && <PetScreen {...commonProps} onBack={() => setInPetScreen(false)} />}
+      {!inPremiumScreen && !inRaffleScreen && !inPetScreen && inGeneratorScreen && (
+        <GeneratorScreen 
+          {...commonProps} 
+          onBack={() => setInGeneratorScreen(false)} 
+          onSaveConfig={handleSaveConfig}
+        />
+      )}
+      {!inPremiumScreen && !inRaffleScreen && !inPetScreen && !inGeneratorScreen && currentNews && (
+        <NewsDetail news={currentNews} {...commonProps} onBack={() => setCurrentNews(null)} />
+      )}
+      {!inPremiumScreen && !inRaffleScreen && !inPetScreen && !inGeneratorScreen && !currentNews && inSensitivityMenu && (
+        <SensitivityMenu {...commonProps} onBack={() => setInSensitivityMenu(false)} />
+      )}
+      {!inPremiumScreen && !inRaffleScreen && !inPetScreen && !inGeneratorScreen && !currentNews && !inSensitivityMenu && (
+        <Dashboard 
+          {...commonProps} 
+          onBack={() => setAppReady(false)} 
+          onNewsClick={handleNewsSelect}
+          onCategoryClick={handleCategoryClick}
+          savedConfigs={savedConfigs}
+          onDeleteConfig={handleDeleteConfig}
+          onPremiumClick={() => setInPremiumScreen(true)}
+        />
+      )}
     </div>
   );
 };

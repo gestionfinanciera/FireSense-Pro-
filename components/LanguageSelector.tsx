@@ -15,15 +15,15 @@ const LanguageSelector: React.FC<LanguageSelectorProps> = ({ onConfirm }) => {
   return (
     <div className="flex flex-col min-h-screen px-6 py-12 md:max-w-md mx-auto relative bg-[#f9fafb]">
       <div className="flex-1 flex flex-col items-center justify-center text-center mb-12 relative z-10">
-        <div className="mb-8 p-4 rounded-2xl bg-white shadow-lg border border-gray-100">
+        <div className="mb-8 p-4 rounded-2xl shadow-lg border bg-white border-gray-100">
            <svg className="w-12 h-12 text-[#FF1E1E]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129" />
            </svg>
         </div>
-        <h1 className="text-3xl font-black mb-4 text-gray-900 tracking-tight uppercase">
+        <h1 className="text-3xl font-black mb-4 tracking-tight uppercase text-gray-900">
           {currentText.title}
         </h1>
-        <p className="text-gray-500 text-sm md:text-base leading-relaxed max-w-[280px]">
+        <p className="text-sm md:text-base leading-relaxed max-w-[280px] text-gray-500">
           {currentText.subtitle}
         </p>
       </div>
@@ -33,10 +33,10 @@ const LanguageSelector: React.FC<LanguageSelectorProps> = ({ onConfirm }) => {
           <button
             key={lang.id}
             onClick={() => setTempLang(lang.id)}
-            className={`w-full flex items-center justify-between p-4 rounded-xl transition-all duration-200 ${
+            className={`w-full flex items-center justify-between p-4 rounded-xl transition-all duration-200 border-2 ${
               tempLang === lang.id 
-                ? 'bg-red-50 border-2 border-[#FF1E1E] shadow-sm' 
-                : 'bg-white border-2 border-transparent hover:bg-gray-50 shadow-sm'
+                ? 'bg-red-50 border-[#FF1E1E] shadow-sm' 
+                : 'bg-white border-transparent hover:bg-gray-50 shadow-sm'
             }`}
           >
             <div className="flex items-center space-x-4 rtl:space-x-reverse">

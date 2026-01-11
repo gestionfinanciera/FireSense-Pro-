@@ -7,9 +7,10 @@ import PetDetailScreen from './PetDetailScreen';
 interface PetScreenProps {
   language: Language;
   onBack: () => void;
+  darkMode: boolean;
 }
 
-const PetScreen: React.FC<PetScreenProps> = ({ language, onBack }) => {
+const PetScreen: React.FC<PetScreenProps> = ({ language, onBack, darkMode }) => {
   const isArabic = language === 'ar';
   const [selectedPet, setSelectedPet] = useState<Pet | null>(null);
 
@@ -19,13 +20,13 @@ const PetScreen: React.FC<PetScreenProps> = ({ language, onBack }) => {
         pet={selectedPet} 
         language={language} 
         onBack={() => setSelectedPet(null)} 
+        darkMode={darkMode}
       />
     );
   }
 
   return (
-    <div className="min-h-screen bg-[#f3f4f6] flex flex-col animate-in fade-in duration-300" dir={isArabic ? 'rtl' : 'ltr'}>
-      {/* Header Estilo Rojo Neón */}
+    <div className={`min-h-screen ${darkMode ? 'bg-black' : 'bg-[#f3f4f6]'} flex flex-col animate-in fade-in duration-300 transition-colors`} dir={isArabic ? 'rtl' : 'ltr'}>
       <header className="header-gradient pt-12 pb-6 px-6 shadow-md flex items-center sticky top-0 z-20">
         <button onClick={onBack} className="text-white p-2 mr-4 rtl:mr-0 rtl:ml-4 active:scale-90 transition-transform">
           <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -37,13 +38,12 @@ const PetScreen: React.FC<PetScreenProps> = ({ language, onBack }) => {
         </h1>
       </header>
 
-      {/* Grid de Mascotas (3 columnas) con estilo Rojo Neón */}
       <main className="p-4 grid grid-cols-3 gap-3">
         {PETS.map((pet) => (
           <button 
             key={pet.id} 
             onClick={() => setSelectedPet(pet)}
-            className="bg-white rounded-lg border border-gray-200 overflow-hidden flex flex-col shadow-sm transition-all hover:border-[#FF1E1E]/50 active:scale-95 text-left rtl:text-right"
+            className={`${darkMode ? 'bg-zinc-900 border-white/10' : 'bg-white border-gray-200'} rounded-lg border overflow-hidden flex flex-col shadow-sm transition-all hover:border-[#FF1E1E]/50 active:scale-95 text-left rtl:text-right`}
           >
             <div className="flex-1 p-2 flex items-center justify-center min-h-[100px]">
               <img 
@@ -62,7 +62,6 @@ const PetScreen: React.FC<PetScreenProps> = ({ language, onBack }) => {
         ))}
       </main>
       
-      {/* Footer spacer */}
       <div className="h-10"></div>
     </div>
   );

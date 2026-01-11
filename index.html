@@ -10,28 +10,31 @@
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #ffffff;
-            color: #111827;
-            overflow-x: hidden;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
-        .neon-text-purple {
-            text-shadow: 0 0 8px rgba(109, 40, 217, 0.4);
-            color: #6d28d9;
+        
+        /* Neon Red Classes */
+        .neon-text-red {
+            text-shadow: 0 0 12px rgba(255, 30, 30, 0.7);
+            color: #FF1E1E;
         }
-        .neon-bg-purple {
-            background: #6d28d9;
-            box-shadow: 0 4px 15px rgba(109, 40, 217, 0.3);
+        .neon-bg-red {
+            background: #FF1E1E;
+            box-shadow: 0 4px 25px rgba(255, 30, 30, 0.5);
         }
         .header-gradient {
-            background: linear-gradient(to bottom, #6d28d9, #5b21b6);
+            background: linear-gradient(to bottom, #FF1E1E, #990000);
         }
-        .category-card {
-            background: #ffffff;
-            transition: transform 0.2s ease;
+        
+        /* Dark Mode Intensified Neons */
+        .dark .neon-border-red {
+            border-color: rgba(255, 30, 30, 0.5);
+            box-shadow: 0 0 15px rgba(255, 30, 30, 0.2);
         }
-        .category-card:active {
-            transform: scale(0.95);
+        .dark .neon-glow-strong {
+            box-shadow: 0 0 30px rgba(255, 30, 30, 0.4);
         }
+
         .hide-scrollbar::-webkit-scrollbar {
             display: none;
         }
@@ -39,7 +42,7 @@
             -ms-overflow-style: none;
             scrollbar-width: none;
         }
-        /* Animación suave para cambios de pestaña */
+        
         .tab-content-enter {
             opacity: 0;
             transform: translateY(10px);

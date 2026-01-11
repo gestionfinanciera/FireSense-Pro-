@@ -17,7 +17,6 @@ const GeneratorScreen: React.FC<GeneratorScreenProps> = ({ language, onBack, onS
   const [dpiEnabled, setDpiEnabled] = useState(false);
   const [hasGenerated, setHasGenerated] = useState(false);
   
-  // Initial state strictly at 0 as requested
   const [sensitivities, setSensitivities] = useState<SensitivitySet>({
     general: 0,
     redDot: 0,
@@ -37,18 +36,14 @@ const GeneratorScreen: React.FC<GeneratorScreenProps> = ({ language, onBack, onS
     let model = "Generic Device";
     let os = "android";
 
-    // Detect OS
     if (ua.match(/iPhone|iPad|iPod/i)) {
       os = "ios";
-      // Try to get specific iPhone model if possible via screen dimensions
-      const width = window.screen.width * window.devicePixelRatio;
       const height = window.screen.height * window.devicePixelRatio;
       if (height === 2796) model = "iPhone 15 Pro Max";
       else if (height === 2556) model = "iPhone 15 Pro";
       else model = "iPhone " + (window.screen.height > 800 ? "Pro Max" : "Standard");
     } else {
       os = "android";
-      // Extract model from UserAgent if available (e.g., SM-G991B)
       const modelMatch = ua.match(/\(([^;]+);/);
       if (modelMatch && modelMatch[1]) {
         model = modelMatch[1].split('Build/')[0].trim();
@@ -58,7 +53,7 @@ const GeneratorScreen: React.FC<GeneratorScreenProps> = ({ language, onBack, onS
     }
 
     const res = `${window.screen.width} x ${window.screen.height} píxeles`;
-    const diagonal = os === 'ios' ? '6.7"' : '6.5"'; // Simulated estimation
+    const diagonal = os === 'ios' ? '6.7"' : '6.5"'; 
     
     setDeviceInfo({ model, os, screenInfo: `${diagonal}, ${res}` });
   };
@@ -67,7 +62,6 @@ const GeneratorScreen: React.FC<GeneratorScreenProps> = ({ language, onBack, onS
     const { os } = deviceInfo;
     let config: SensitivitySet;
 
-    // Logic based on the professional guide provided (0-200 range)
     if (os === 'ios') {
       config = {
         general: Math.floor(Math.random() * (145 - 130 + 1)) + 130,
@@ -127,7 +121,6 @@ const GeneratorScreen: React.FC<GeneratorScreenProps> = ({ language, onBack, onS
 
   return (
     <div className="min-h-screen bg-white flex flex-col animate-in fade-in duration-300" dir={isArabic ? 'rtl' : 'ltr'}>
-      {/* Header with Device and Screen Specs */}
       <header className="header-gradient pt-12 pb-6 px-6 shadow-md flex items-center sticky top-0 z-20">
         <button onClick={onBack} className="text-white p-2 mr-4 rtl:mr-0 rtl:ml-4 active:scale-90 transition-transform">
           <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -145,7 +138,6 @@ const GeneratorScreen: React.FC<GeneratorScreenProps> = ({ language, onBack, onS
       </header>
 
       <main className="flex-1 p-6 space-y-6">
-        {/* Info Area */}
         <div className="text-center bg-gray-50 rounded-2xl py-4 border border-gray-100">
           <p className="text-[#FF1E1E] font-black text-lg tracking-tight uppercase">
             {dpiEnabled && sensitivities.dpi ? text.genUsingDpi.replace('{dpi}', sensitivities.dpi.toString()) : (hasGenerated ? text.genNoDpi : "ESPERANDO GENERACIÓN")}
@@ -155,7 +147,6 @@ const GeneratorScreen: React.FC<GeneratorScreenProps> = ({ language, onBack, onS
           </p>
         </div>
 
-        {/* Sensitivities List (Non-interactive) */}
         <div className="bg-[#FF1E1E] rounded-3xl p-6 shadow-[0_20px_50px_rgba(255,30,30,0.3)] text-white space-y-5 relative overflow-hidden transition-all duration-500">
           <SensitivityRow label={text.genGeneral} value={sensitivities.general} />
           <SensitivityRow label={text.genRedDot} value={sensitivities.redDot} />
@@ -165,35 +156,32 @@ const GeneratorScreen: React.FC<GeneratorScreenProps> = ({ language, onBack, onS
           <SensitivityRow label={text.gen360} value={sensitivities.cam360} last />
         </div>
 
-        {/* Action Controls */}
         <div className="space-y-4">
-           {/* Button Size Card */}
-           <div className="w-full bg-black rounded-2xl p-5 flex items-center justify-between shadow-xl border border-white/10 group active:scale-[0.98] transition-transform">
+           {/* TARJETA DISPARO ACTUALIZADA A MODO CLARO */}
+           <div className="bg-gray-50 border-gray-100 rounded-3xl p-6 flex items-center justify-between shadow-lg border group active:scale-[0.98] transition-all">
               <div className="flex items-center space-x-4 rtl:space-x-reverse">
-                <div className="w-12 h-12 rounded-full bg-[#FF1E1E]/10 border border-[#FF1E1E]/30 flex items-center justify-center">
-                   <div className="w-4 h-4 rounded-full bg-[#FF1E1E] shadow-[0_0_10px_#FF1E1E]"></div>
+                <div className="w-14 h-14 rounded-2xl bg-[#FF1E1E]/5 border border-[#FF1E1E]/20 flex items-center justify-center">
+                   <div className="w-5 h-5 rounded-full bg-[#FF1E1E] shadow-[0_0_12px_#FF1E1E]"></div>
                 </div>
                 <div>
-                  <p className="text-gray-500 text-[10px] font-black uppercase tracking-widest">{text.genButton}</p>
-                  <p className="text-white font-black text-xl">DISPARO</p>
+                  <p className="text-gray-400 text-[10px] font-black uppercase tracking-widest leading-none mb-1">{text.genButton}</p>
+                  <p className="text-gray-900 font-black text-xl uppercase tracking-tighter italic">Disparo</p>
                 </div>
               </div>
               <div className="text-right">
-                <span className="text-4xl font-black neon-text-red italic">{sensitivities.buttonSize}%</span>
+                <span className="text-5xl font-black neon-text-red italic tracking-tighter">{sensitivities.buttonSize}%</span>
               </div>
            </div>
 
-           {/* DPI Toggle - Only for Android */}
            {deviceInfo.os !== 'ios' && (
-             <div className="flex items-center justify-between w-full bg-gray-50 p-4 rounded-2xl border border-gray-100">
+             <div className="flex items-center justify-between w-full bg-gray-50 border-gray-100 p-5 rounded-3xl border">
                 <div className="flex flex-col">
-                  <span className="font-black text-gray-800 uppercase text-xs tracking-widest">{text.genDpi}</span>
+                  <span className="font-black uppercase text-xs tracking-widest text-gray-800">{text.genDpi}</span>
                   <span className="text-[10px] text-gray-400 font-bold">OPTIMIZACIÓN DE PIXÉLES</span>
                 </div>
                 <button 
                   onClick={() => {
                     setDpiEnabled(!dpiEnabled);
-                    // Force refresh if already generated
                     if(hasGenerated) setTimeout(generateSens, 100);
                   }}
                   className={`w-16 h-8 rounded-full relative transition-all duration-300 shadow-inner ${dpiEnabled ? 'bg-[#FF1E1E]' : 'bg-gray-200'}`}
@@ -205,8 +193,7 @@ const GeneratorScreen: React.FC<GeneratorScreenProps> = ({ language, onBack, onS
         </div>
       </main>
 
-      {/* Action Footer */}
-      <footer className="bg-white border-t border-gray-100 flex items-center h-24 px-4 pb-4">
+      <footer className="bg-white border-t border-gray-50 flex items-center h-28 px-4 pb-10">
         <button 
           onClick={generateSens}
           className="flex-1 flex flex-col items-center justify-center group active:scale-95 transition-all"
@@ -235,10 +222,9 @@ const GeneratorScreen: React.FC<GeneratorScreenProps> = ({ language, onBack, onS
         </button>
       </footer>
 
-      {/* Save Modal */}
       {isModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center px-6 bg-black/80 backdrop-blur-md animate-in fade-in duration-300">
-           <div className="bg-white w-full max-w-sm rounded-[2.5rem] p-8 shadow-2xl animate-in zoom-in duration-300 border border-gray-100">
+        <div className="fixed inset-0 z-50 flex items-center justify-center px-6 bg-black/40 backdrop-blur-sm animate-in fade-in duration-300">
+           <div className="bg-white border-gray-100 w-full max-w-sm rounded-[2.5rem] p-8 shadow-2xl animate-in zoom-in duration-300 border">
               <div className="w-16 h-16 bg-red-50 rounded-full flex items-center justify-center mx-auto mb-6">
                  <svg className="w-8 h-8 text-[#FF1E1E]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M12 4v16m8-8H4" />
@@ -252,14 +238,14 @@ const GeneratorScreen: React.FC<GeneratorScreenProps> = ({ language, onBack, onS
                 value={configName}
                 onChange={(e) => setConfigName(e.target.value)}
                 placeholder={text.saveModalPlaceholder}
-                className="w-full bg-gray-50 border-2 border-gray-100 rounded-2xl py-5 px-6 text-center font-black text-gray-800 focus:outline-none focus:border-[#FF1E1E] transition-all mb-8 uppercase"
+                className="w-full bg-gray-50 border-gray-100 text-gray-800 border-2 rounded-2xl py-5 px-6 text-center font-black focus:outline-none focus:border-[#FF1E1E] transition-all mb-8 uppercase"
                 autoFocus
               />
               
               <div className="flex space-x-3 rtl:space-x-reverse">
                 <button 
                   onClick={() => setIsModalOpen(false)}
-                  className="flex-1 py-4 bg-gray-100 rounded-2xl font-black text-gray-500 uppercase text-xs tracking-widest active:scale-95 transition-all"
+                  className="flex-1 py-4 bg-gray-100 text-gray-500 rounded-2xl font-black uppercase text-xs tracking-widest active:scale-95 transition-all"
                 >
                   {text.back}
                 </button>
@@ -279,7 +265,6 @@ const GeneratorScreen: React.FC<GeneratorScreenProps> = ({ language, onBack, onS
 
 const SensitivityRow: React.FC<{ label: string; value: number; last?: boolean }> = ({ label, value, last }) => {
   const percentage = (value / 200) * 100;
-
   return (
     <div className={`pb-2 ${!last ? 'border-b border-white/10' : ''}`}>
       <div className="flex justify-between items-end mb-1.5">

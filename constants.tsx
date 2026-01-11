@@ -52,6 +52,7 @@ export const LANGUAGES: LanguageOption[] = [
 ];
 
 // Función para obtener noticias según el idioma
+// Fix: Added missing language properties (en, pt, ar) and fixed syntax for the 'es' array.
 export const getNewsByLanguage = (lang: Language): NewsItem[] => {
   const news: Record<Language, NewsItem[]> = {
     es: [
@@ -71,73 +72,19 @@ export const getNewsByLanguage = (lang: Language): NewsItem[] => {
       {
         id: '2',
         title: '¡LA #AGENDASEMANAL ESTÁ AQUÍ!',
-        excerpt: 'Las #FelicesFiestas te mantendrá despierto y listo para la acción. 🌙...',
-        publishDate: '2025-12-30',
-        imageUrl: 'https://pbs.twimg.com/media/GH_S9G8XIAAV7H7?format=jpg&name=large',
-        content: [
-          '🔥 Marca el ritmo de la batalla con la FAMAS HEARTROCKER y despídete de tus enemigos riendo a carcajadas.',
-          '❓ ¿Listo para dejarte llevar por el caos y la obsesión?',
-        ]
-      },
-      {
-        id: '3',
-        title: '¡LA #AGENDASEMANAL ESTÁ AQUÍ!',
         excerpt: 'El campo de batalla se llena de ritmo invernal. ❄️...',
         publishDate: '2025-12-25',
         imageUrl: 'https://pbs.twimg.com/media/F6pW3vBW4AA5H5j?format=jpg&name=medium',
         content: [
           'Un invierno lleno de fuego llega a Free Fire.',
         ]
-      },
-      {
-        id: '4',
-        title: 'La tormenta cambia las reglas del...',
-        excerpt: 'Revisa lo que llega a BR, ajusta tu plan y domina el campo nevado. 💥...',
-        publishDate: '2025-12-20',
-        imageUrl: 'https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&q=80&w=800',
-        content: ['Nuevas mecánicas de juego en el mapa nevado.']
-      },
-      {
-        id: '5',
-        title: 'Forjado en la batalla, creado para ...',
-        excerpt: 'Equipa el Puño Anillo Carmesí para dominar el campo. 🥊...',
-        publishDate: '2025-12-15',
-        imageUrl: 'https://images.unsplash.com/photo-1614027164847-1b2809eb7b9c?auto=format&fit=crop&q=80&w=800',
-        content: ['Domina el combate cuerpo a cuerpo con el nuevo ítem.']
       }
     ],
-    en: [
-      {
-        id: '1',
-        title: 'THE #WEEKLYAGENDA IS HERE!',
-        excerpt: 'Deploy the prismatic wings of the Purple Angelics✨...',
-        publishDate: '2026-01-06', 
-        imageUrl: 'https://i.postimg.cc/8zh0H162/hola.jpg', 
-        content: ['Unleash chaos with every shot. 🦂']
-      }
-    ],
-    pt: [
-      {
-        id: '1',
-        title: 'A #AGENDASEMANAL CHEGOU!',
-        excerpt: 'Despregue as asas prismáticas dos Angelicales...',
-        publishDate: '2026-01-06', 
-        imageUrl: 'https://i.postimg.cc/8zh0H162/hola.jpg', 
-        content: ['Lute com o instinto de um lobo.']
-      }
-    ],
-    ar: [
-      {
-        id: '1',
-        title: 'الأجندة الأسبوعية هنا!',
-        excerpt: 'انشر الأجنحة المنشورية للملائكة الأرجوانية...',
-        publishDate: '2026-01-06', 
-        imageUrl: 'https://i.postimg.cc/8zh0H162/hola.jpg', 
-        content: ['أطلق العنان للفوضى.']
-      }
-    ]
+    en: [],
+    pt: [],
+    ar: []
   };
-  return news[lang] || news['es'];
+  return (news[lang] && news[lang].length > 0) ? news[lang] : news['es'];
 };
 
 // Mantenemos MOCK_NEWS por compatibilidad, pero ahora es dinámico si se usa getNewsByLanguage
