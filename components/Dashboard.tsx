@@ -8,9 +8,10 @@ interface DashboardProps {
   language: Language;
   onBack: () => void;
   onNewsClick: (news: NewsItem) => void;
+  onCategoryClick?: (category: string) => void;
 }
 
-const Dashboard: React.FC<DashboardProps> = ({ language, onBack, onNewsClick }) => {
+const Dashboard: React.FC<DashboardProps> = ({ language, onBack, onNewsClick, onCategoryClick }) => {
   const text = TRANSLATIONS[language];
   const isArabic = language === 'ar';
 
@@ -75,14 +76,18 @@ const Dashboard: React.FC<DashboardProps> = ({ language, onBack, onNewsClick }) 
           <h2 className="text-xl font-black mb-6 text-gray-900 uppercase tracking-tight">{text.categorias}</h2>
           <div className="grid grid-cols-4 gap-y-8 gap-x-2">
             {categories.map((cat, i) => (
-              <div key={i} className="flex flex-col items-center">
+              <button 
+                key={i} 
+                onClick={() => onCategoryClick?.(cat.name)}
+                className="flex flex-col items-center"
+              >
                 <div className={`w-14 h-14 rounded-2xl ${cat.color} flex items-center justify-center text-2xl shadow-sm category-card`}>
                   {cat.icon}
                 </div>
                 <span className="text-[9px] font-black text-gray-800 mt-2 text-center uppercase leading-none px-1">
                   {cat.name}
                 </span>
-              </div>
+              </button>
             ))}
           </div>
         </div>

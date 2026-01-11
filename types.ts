@@ -33,6 +33,13 @@ export interface TranslationSet {
   hace: string;
   dias: string;
   hoy: string;
+  // Sensitivity Menu
+  sensMenuPremium: string;
+  sensMenuPremiumDesc: string;
+  sensMenuDefault: string;
+  sensMenuDefaultDesc: string;
+  sensMenuPlayers: string;
+  sensMenuPlayersDesc: string;
 }
 
 export interface LanguageOption {
