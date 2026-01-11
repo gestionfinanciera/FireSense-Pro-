@@ -6,7 +6,7 @@ export interface NewsItem {
   title: string;
   excerpt: string;
   content: string[];
-  publishDate: string; // Formato YYYY-MM-DD
+  publishDate: string;
   imageUrl: string;
 }
 
@@ -33,13 +33,26 @@ export interface TranslationSet {
   hace: string;
   dias: string;
   hoy: string;
-  // Sensitivity Menu
   sensMenuPremium: string;
   sensMenuPremiumDesc: string;
   sensMenuDefault: string;
   sensMenuDefaultDesc: string;
   sensMenuPlayers: string;
   sensMenuPlayersDesc: string;
+  // Premium Screen
+  premiumTitle: string;
+  premiumSubtitle: string;
+  premiumLabel: string;
+  basicLabel: string;
+  featDarkMode: string;
+  featBasicSens: string;
+  featInsaneSens: string;
+  featUnlimitedGen: string;
+  featExclusiveSkills: string;
+  featNoAds: string;
+  premiumPrice: string;
+  premiumBuy: string;
+  premiumDisclaimer: string;
 }
 
 export interface LanguageOption {

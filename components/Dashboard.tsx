@@ -9,9 +9,10 @@ interface DashboardProps {
   onBack: () => void;
   onNewsClick: (news: NewsItem) => void;
   onCategoryClick?: (category: string) => void;
+  onPremiumClick?: () => void;
 }
 
-const Dashboard: React.FC<DashboardProps> = ({ language, onBack, onNewsClick, onCategoryClick }) => {
+const Dashboard: React.FC<DashboardProps> = ({ language, onBack, onNewsClick, onCategoryClick, onPremiumClick }) => {
   const text = TRANSLATIONS[language];
   const isArabic = language === 'ar';
 
@@ -38,7 +39,7 @@ const Dashboard: React.FC<DashboardProps> = ({ language, onBack, onNewsClick, on
       {/* Top Header */}
       <div className="header-gradient pt-12 pb-6 px-6 rounded-b-[2rem] shadow-lg relative overflow-hidden">
         <div className="flex items-center justify-center relative z-10">
-          <button onClick={onBack} className="absolute left-0 text-white p-2">
+          <button onClick={onPremiumClick} className="absolute left-0 text-white p-2 transition-transform active:scale-90">
             <span className="text-xl">👑</span>
           </button>
           <h1 className="text-white font-bold text-xl">FireSense Pro+</h1>

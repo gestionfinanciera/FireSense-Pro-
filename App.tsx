@@ -5,6 +5,7 @@ import LanguageSelector from './components/LanguageSelector';
 import Dashboard from './components/Dashboard';
 import NewsDetail from './components/NewsDetail';
 import SensitivityMenu from './components/SensitivityMenu';
+import PremiumScreen from './components/PremiumScreen';
 
 const App: React.FC = () => {
   const [selectedLang, setSelectedLang] = useState<Language | null>(null);
@@ -12,6 +13,7 @@ const App: React.FC = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [currentNews, setCurrentNews] = useState<NewsItem | null>(null);
   const [inSensitivityMenu, setInSensitivityMenu] = useState(false);
+  const [inPremiumScreen, setInPremiumScreen] = useState(false);
 
   useEffect(() => {
     // Simulate initial asset loading
@@ -49,6 +51,10 @@ const App: React.FC = () => {
     return <LanguageSelector onConfirm={handleLanguageSelect} />;
   }
 
+  if (inPremiumScreen) {
+    return <PremiumScreen language={selectedLang!} onBack={() => setInPremiumScreen(false)} />;
+  }
+
   if (currentNews) {
     return <NewsDetail news={currentNews} language={selectedLang!} onBack={() => setCurrentNews(null)} />;
   }
@@ -64,6 +70,7 @@ const App: React.FC = () => {
         onBack={() => setAppReady(false)} 
         onNewsClick={handleNewsSelect}
         onCategoryClick={handleCategoryClick}
+        onPremiumClick={() => setInPremiumScreen(true)}
       />
     </div>
   );
