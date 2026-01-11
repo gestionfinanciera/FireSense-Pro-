@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import { Language, NewsItem } from './types';
+import { Language, NewsItem, SavedConfig } from './types';
 import LanguageSelector from './components/LanguageSelector';
 import Dashboard from './components/Dashboard';
 import NewsDetail from './components/NewsDetail';
@@ -18,6 +18,8 @@ const App: React.FC = () => {
   const [inPremiumScreen, setInPremiumScreen] = useState(false);
   const [inRaffleScreen, setInRaffleScreen] = useState(false);
   const [inGeneratorScreen, setInGeneratorScreen] = useState(false);
+  
+  const [savedConfigs, setSavedConfigs] = useState<SavedConfig[]>([]);
 
   useEffect(() => {
     // Simulate initial asset loading
@@ -34,6 +36,10 @@ const App: React.FC = () => {
 
   const handleNewsSelect = (news: NewsItem) => {
     setCurrentNews(news);
+  };
+
+  const handleSaveConfig = (config: SavedConfig) => {
+    setSavedConfigs(prev => [config, ...prev]);
   };
 
   const handleCategoryClick = (category: string) => {
@@ -69,7 +75,13 @@ const App: React.FC = () => {
   }
 
   if (inGeneratorScreen) {
-    return <GeneratorScreen language={selectedLang!} onBack={() => setInGeneratorScreen(false)} />;
+    return (
+      <GeneratorScreen 
+        language={selectedLang!} 
+        onBack={() => setInGeneratorScreen(false)} 
+        onSaveConfig={handleSaveConfig}
+      />
+    );
   }
 
   if (currentNews) {
@@ -87,6 +99,7 @@ const App: React.FC = () => {
         onBack={() => setAppReady(false)} 
         onNewsClick={handleNewsSelect}
         onCategoryClick={handleCategoryClick}
+        savedConfigs={savedConfigs}
         onPremiumClick={() => setInPremiumScreen(true)}
       />
     </div>

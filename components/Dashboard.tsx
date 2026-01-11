@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { Language, NewsItem } from '../types';
+import { Language, NewsItem, SavedConfig } from '../types';
 import { TRANSLATIONS, MOCK_NEWS } from '../constants';
 import { getRelativeDate } from '../utils';
 import FavoritesScreen from './FavoritesScreen';
@@ -9,13 +9,14 @@ interface DashboardProps {
   language: Language;
   onBack: () => void;
   onNewsClick: (news: NewsItem) => void;
+  savedConfigs: SavedConfig[];
   onCategoryClick?: (category: string) => void;
   onPremiumClick?: () => void;
 }
 
 type Tab = 'inicio' | 'noticias' | 'favoritos' | 'ajustes';
 
-const Dashboard: React.FC<DashboardProps> = ({ language, onBack, onNewsClick, onCategoryClick, onPremiumClick }) => {
+const Dashboard: React.FC<DashboardProps> = ({ language, onBack, onNewsClick, savedConfigs, onCategoryClick, onPremiumClick }) => {
   const [activeTab, setActiveTab] = useState<Tab>('inicio');
   const text = TRANSLATIONS[language];
   const isArabic = language === 'ar';
@@ -41,7 +42,7 @@ const Dashboard: React.FC<DashboardProps> = ({ language, onBack, onNewsClick, on
   const renderContent = () => {
     switch(activeTab) {
       case 'favoritos':
-        return <FavoritesScreen language={language} />;
+        return <FavoritesScreen language={language} savedConfigs={savedConfigs} />;
       case 'noticias':
         return (
           <div className="flex-1 overflow-y-auto px-0 pb-6 animate-in fade-in duration-300">

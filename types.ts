@@ -1,6 +1,24 @@
 
 export type Language = 'es' | 'en' | 'pt' | 'ar';
 
+export interface SensitivitySet {
+  general: number;
+  redDot: number;
+  mira2x: number;
+  mira4x: number;
+  sniper: number;
+  cam360: number;
+  buttonSize: number;
+  dpi: number | null;
+}
+
+export interface SavedConfig extends SensitivitySet {
+  id: string;
+  name: string;
+  device: string;
+  date: string;
+}
+
 export interface NewsItem {
   id: string;
   title: string;
@@ -71,6 +89,7 @@ export interface TranslationSet {
   noFavoritesDesc: string;
   // Generator Screen
   genUsingDpi: string;
+  genNoDpi: string;
   genScreen: string;
   genGeneral: string;
   genRedDot: string;
@@ -83,6 +102,8 @@ export interface TranslationSet {
   genCoins: string;
   genRegenerate: string;
   genSave: string;
+  saveModalTitle: string;
+  saveModalPlaceholder: string;
 }
 
 export interface LanguageOption {
