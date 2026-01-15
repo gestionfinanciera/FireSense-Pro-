@@ -15,14 +15,13 @@ interface PetDetailScreenProps {
   pet: Pet;
   language: Language;
   onBack: () => void;
-  darkMode: boolean;
 }
 
-const PetDetailScreen: React.FC<PetDetailScreenProps> = ({ pet, language, onBack, darkMode }) => {
+const PetDetailScreen: React.FC<PetDetailScreenProps> = ({ pet, language, onBack }) => {
   const isArabic = language === 'ar';
 
   return (
-    <div className={`min-h-screen ${darkMode ? 'bg-black' : 'bg-white'} flex flex-col animate-in fade-in slide-in-from-right duration-300 transition-colors`} dir={isArabic ? 'rtl' : 'ltr'}>
+    <div className="min-h-screen bg-white flex flex-col animate-in fade-in slide-in-from-right duration-300 transition-colors" dir={isArabic ? 'rtl' : 'ltr'}>
       <header className="header-gradient pt-12 pb-6 px-6 shadow-md flex items-center sticky top-0 z-20">
         <button onClick={onBack} className="text-white p-2 mr-4 rtl:mr-0 rtl:ml-4 active:scale-90 transition-transform">
           <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -35,7 +34,7 @@ const PetDetailScreen: React.FC<PetDetailScreenProps> = ({ pet, language, onBack
       </header>
 
       <main className="flex-1 p-6 space-y-8 overflow-y-auto">
-        <div className={`${darkMode ? 'bg-zinc-900 border-white/5' : 'bg-white border-gray-100 shadow-[0_10px_30px_rgba(255,30,30,0.05)]'} rounded-[2.5rem] border p-6 flex items-center justify-center min-h-[250px] transition-colors`}>
+        <div className="bg-white border-gray-100 shadow-[0_10px_30px_rgba(255,30,30,0.05)] rounded-[2.5rem] border p-6 flex items-center justify-center min-h-[250px] transition-colors">
            <img 
              src={pet.imageUrl} 
              alt={pet.name} 
@@ -44,7 +43,7 @@ const PetDetailScreen: React.FC<PetDetailScreenProps> = ({ pet, language, onBack
         </div>
 
         <div className="text-center">
-          <h2 className={`text-2xl font-black ${darkMode ? 'text-white' : 'text-gray-900'} tracking-tight`}>
+          <h2 className="text-2xl font-black text-gray-900 tracking-tight">
             <span className="text-[#FF1E1E] mr-2">⚡</span>
             Habilidad: {pet.abilityName}
           </h2>
@@ -56,11 +55,11 @@ const PetDetailScreen: React.FC<PetDetailScreenProps> = ({ pet, language, onBack
           </p>
         </div>
 
-        <div className={`space-y-4 px-4 border-l-4 border-[#FF1E1E] ${darkMode ? 'bg-red-900/10' : 'bg-red-50/30'} py-4 rounded-r-2xl transition-colors`}>
-           <h3 className={`text-xl font-black ${darkMode ? 'text-white' : 'text-gray-900'} uppercase tracking-tight`}>
-             Habilidad
+        <div className="space-y-4 px-4 border-l-4 border-[#FF1E1E] bg-red-50/30 py-4 rounded-r-2xl transition-colors">
+           <h3 className="text-xl font-black text-gray-900 uppercase tracking-tight">
+             Efecto
            </h3>
-           <p className={`${darkMode ? 'text-gray-300' : 'text-gray-700'} text-lg leading-relaxed font-normal`}>
+           <p className="text-gray-700 text-lg leading-relaxed font-normal">
              {pet.abilityEffect}
            </p>
         </div>

@@ -9,6 +9,7 @@ import PremiumScreen from './components/PremiumScreen';
 import RaffleScreen from './components/RaffleScreen';
 import GeneratorScreen from './components/GeneratorScreen';
 import PetScreen from './components/PetScreen';
+import Analytics from './services/analytics';
 
 const App: React.FC = () => {
   const [selectedLang, setSelectedLang] = useState<Language | null>(null);
@@ -24,31 +25,42 @@ const App: React.FC = () => {
   const [savedConfigs, setSavedConfigs] = useState<SavedConfig[]>([]);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 1200);
-    return () => clearTimeout(timer);
+    try {
+      Analytics.init();
+      const timer = setTimeout(() => {
+        setIsLoading(false);
+      }, 1200);
+      return () => clearTimeout(timer);
+    } catch (e) {
+      Analytics.logError("Error in App initialization: " + (e as Error).message);
+    }
   }, []);
 
   const handleLanguageSelect = (lang: Language) => {
+    Analytics.logAction('language_selected', 'onboarding', lang);
     setSelectedLang(lang);
     setAppReady(true);
   };
 
   const handleNewsSelect = (news: NewsItem) => {
+    Analytics.logScreenView('NewsDetail: ' + news.title);
     setCurrentNews(news);
   };
 
   const handleSaveConfig = (config: SavedConfig) => {
+    Analytics.logAction('config_saved', 'generator', config.name);
     setSavedConfigs(prev => [config, ...prev]);
   };
 
   const handleDeleteConfig = (id: string) => {
+    Analytics.logAction('config_deleted', 'favorites', id);
     setSavedConfigs(prev => prev.filter(config => config.id !== id));
   };
 
   const handleCategoryClick = (category: string) => {
     const cat = category.toUpperCase();
+    Analytics.logAction('category_click', 'dashboard', cat);
+    
     if (cat === 'SENSIBILIDAD' || cat === 'SENSITIVITY' || cat === 'SENSIBILIDADE' || cat === 'حساسية') {
       setInSensitivityMenu(true);
     } else if (cat === 'SORTEOS' || cat === 'RAFFLES' || cat === 'سحوبات') {
@@ -63,8 +75,8 @@ const App: React.FC = () => {
   if (isLoading) {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center bg-white">
-        <div className="w-16 h-16 border-4 border-red-50 border-t-[#FF1E1E] rounded-full animate-spin mb-4 shadow-[0_0_15px_rgba(255,30,30,0.1)]"></div>
-        <h1 className="text-[#FF1E1E] font-black text-xl tracking-widest animate-pulse">FIRESENSE PRO+</h1>
+        <div className="w-16 h-16 border-4 border-red-50 border-t-[#FF1E1E] rounded-full animate-spin mb-4"></div>
+        <h1 className="text-[#FF1E1E] font-black text-xl tracking-widest animate-pulse uppercase">FIRESENSE PRO+</h1>
       </div>
     );
   }
@@ -78,7 +90,7 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#f3f4f6] text-gray-900 selection:bg-[#FF1E1E] selection:text-white overflow-x-hidden">
+    <div className="min-h-screen bg-[#f3f4f6] text-gray-900 selection:bg-[#FF1E1E] selection:text-white overflow-x-hidden font-sans">
       {inPremiumScreen && <PremiumScreen {...commonProps} onBack={() => setInPremiumScreen(false)} />}
       {!inPremiumScreen && inRaffleScreen && <RaffleScreen {...commonProps} onBack={() => setInRaffleScreen(false)} />}
       {!inPremiumScreen && !inRaffleScreen && inPetScreen && <PetScreen {...commonProps} onBack={() => setInPetScreen(false)} />}
@@ -103,7 +115,10 @@ const App: React.FC = () => {
           onCategoryClick={handleCategoryClick}
           savedConfigs={savedConfigs}
           onDeleteConfig={handleDeleteConfig}
-          onPremiumClick={() => setInPremiumScreen(true)}
+          onPremiumClick={() => {
+            Analytics.logAction('premium_click', 'dashboard');
+            setInPremiumScreen(true);
+          }}
         />
       )}
     </div>
