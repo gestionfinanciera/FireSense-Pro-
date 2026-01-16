@@ -1,48 +1,37 @@
 
-import { LanguageOption, Language, TranslationSet, NewsItem, Pet } from './types';
+import { LanguageOption, Language, TranslationSet, NewsItem, Pet, HudItem, DeviceSensitivity } from './types';
 
-// ==========================================
-// 📅 EDITA AQUÍ LA FECHA DEL SORTEO:
 export const RAFFLE_END_DATE = '15/03/2026';
-// ==========================================
 
-// ==========================================
-// 🐾 EDITA AQUÍ LAS MASCOTAS (IMÁGENES E INFO):
-export const PETS: Pet[] = [
-  { 
-    id: '1', 
-    name: 'Kactus', 
-    imageUrl: 'https://static.wikia.nocookie.net/freefire/images/5/5e/Kactus.png', 
-    abilityName: 'Autosuficiente',
-    description: 'Kactus es un cactus animado con una personalidad tranquila y adaptable.',
-    abilityEffect: 'Permite regenerar puntos de energía de forma gradual mientras el jugador permanece inmóvil.'
-  },
-  { 
-    id: '2', 
-    name: 'Draki', 
-    imageUrl: 'https://static.wikia.nocookie.net/freefire/images/a/a2/Draki.png',
-    abilityName: 'Aliento Ígneo',
-    description: 'Un pequeño dragón que puede detectar enemigos a través de las paredes.',
-    abilityEffect: 'Detecta a los enemigos que usan botiquines de primeros auxilios en un radio cercano.'
-  },
-  { 
-    id: '3', 
-    name: 'Bestion', 
-    imageUrl: 'https://static.wikia.nocookie.net/freefire/images/3/3a/Beaston.png',
-    abilityName: 'Mano Amiga',
-    description: 'Un gorila experto en lanzamientos tácticos.',
-    abilityEffect: 'Aumenta la distancia de lanzamiento de granadas, paredes gloo y granadas de humo.'
-  },
-  { 
-    id: '4', 
-    name: 'Colmillo', 
-    imageUrl: 'https://static.wikia.nocookie.net/freefire/images/8/82/Fang.png',
-    abilityName: 'Cacería Voraz',
-    description: 'Un lobo de fuego que nunca deja escapar a su presa.',
-    abilityEffect: 'Otorga puntos de energía o vida cada vez que un compañero de equipo es derribado.'
-  }
+// Generar una fecha de última actualización dentro de los últimos 60 días
+const getRecentUpdateDate = () => {
+  const d = new Date();
+  d.setDate(d.getDate() - Math.floor(Math.random() * 45));
+  return d.toISOString().split('T')[0];
+};
+
+export const PREDEFINED_SENSITIVITIES: DeviceSensitivity[] = [
+  // APPLE (Valores hasta 200)
+  { id: 'ap1', brand: 'Apple', model: 'iPhone 15 Pro Max', colorTag: '#FF1E1E', general: 198, redDot: 192, mira2x: 188, mira4x: 185, sniper: 150, cam360: 200, buttonSize: 45, dpi: null, lastUpdated: getRecentUpdateDate() },
+  { id: 'ap2', brand: 'Apple', model: 'iPhone 14', colorTag: '#FF1E1E', general: 195, redDot: 190, mira2x: 185, mira4x: 180, sniper: 145, cam360: 195, buttonSize: 48, dpi: null, lastUpdated: getRecentUpdateDate() },
+  { id: 'sa1', brand: 'Samsung', model: 'Galaxy S24 Ultra', colorTag: '#FF1E1E', general: 196, redDot: 185, mira2x: 180, mira4x: 175, sniper: 142, cam360: 195, buttonSize: 44, dpi: 600, lastUpdated: getRecentUpdateDate() },
+  { id: 'sa2', brand: 'Samsung', model: 'Galaxy A54 5G', colorTag: '#FF1E1E', general: 192, redDot: 182, mira2x: 178, mira4x: 170, sniper: 138, cam360: 185, buttonSize: 50, dpi: 450, lastUpdated: getRecentUpdateDate() },
+  { id: 'xi1', brand: 'Xiaomi', model: 'Poco X6 Pro', colorTag: '#FF1E1E', general: 194, redDot: 188, mira2x: 182, mira4x: 178, sniper: 140, cam360: 192, buttonSize: 47, dpi: 550, lastUpdated: getRecentUpdateDate() },
+  // MODELOS CLÁSICOS (Valores hasta 200)
+  { id: 'ex1', brand: '360', model: '360 F4s', colorTag: '#1E3A8A', general: 200, redDot: 195, mira2x: 190, mira4x: 185, sniper: 150, cam360: 200, buttonSize: 60, dpi: null, lastUpdated: getRecentUpdateDate() },
+  { id: 'ex2', brand: '360', model: '360 N6', colorTag: '#166534', general: 198, redDot: 192, mira2x: 188, mira4x: 182, sniper: 148, cam360: 195, buttonSize: 58, dpi: null, lastUpdated: getRecentUpdateDate() },
+  { id: 'ex6', brand: 'Acer', model: 'Acer Liquid Jade Z', colorTag: '#DC2626', general: 200, redDot: 200, mira2x: 195, mira4x: 190, sniper: 160, cam360: 200, buttonSize: 65, dpi: null, lastUpdated: getRecentUpdateDate() },
+  { id: 'ex7', brand: 'Acer', model: 'Acer Liquid M220', colorTag: '#7C3AED', general: 200, redDot: 200, mira2x: 200, mira4x: 200, sniper: 170, cam360: 200, buttonSize: 70, dpi: null, lastUpdated: getRecentUpdateDate() },
 ];
-// ==========================================
+
+export const HUD_DATA: HudItem[] = [
+  { id: 'h1', fingers: 2, title: 'Custom hud 2 dedos', thumbnailUrl: 'https://i.postimg.cc/Twzq0mpN/Captura-desde-2026-01-16-12-23-20.png', videoUrl: 'https://youtu.be/wyj7-gGrDLU?si=c_gQJaVgYFXyKqN4' },
+  { id: 'h2', fingers: 2, title: 'Custom hud 2 dedos', thumbnailUrl: 'https://i.postimg.cc/mgKDtSq0/Captura-desde-2026-01-16-12-26-55.png', videoUrl: 'https://youtu.be/3UBMDVixKOk?si=3ypKaUBAs06IRpHf' },
+];
+
+export const PETS: Pet[] = [
+  { id: '1', name: 'Kactus', imageUrl: 'https://static.wikia.nocookie.net/freefire/images/5/5e/Kactus.png', abilityName: 'Autosuficiente', description: 'Kactus es un cactus animado con una personalidad tranquila y adaptable.', abilityEffect: 'Permite regenerar puntos de energía de forma gradual mientras el jugador permanece inmóvil.' },
+];
 
 export const LANGUAGES: LanguageOption[] = [
   { id: 'es', name: 'Español', flag: '🇪🇸' },
@@ -51,336 +40,54 @@ export const LANGUAGES: LanguageOption[] = [
   { id: 'ar', name: 'Áرabe', flag: '🇦🇪' }
 ];
 
-// Función para obtener noticias según el idioma
-// Fix: Added missing language properties (en, pt, ar) and fixed syntax for the 'es' array.
-export const getNewsByLanguage = (lang: Language): NewsItem[] => {
-  const news: Record<Language, NewsItem[]> = {
-    es: [
-      {
-        id: '1',
-        title: '¡LA #AGENDASEMANAL ESTÁ AQUÍ!',
-        excerpt: 'Despliega las alas prismáticas de los Angelicales Morados✨ y entra al campo con el instinto feroz de un Lobo. 🐺...',
-        publishDate: '2026-01-06', 
-        imageUrl: 'https://i.postimg.cc/8zh0H162/hola.jpg', 
-        content: [
-          'Desata la Destrucción Escorpión de la EVO M1014 y deja que el caos se expanda con cada disparo. 🦂',
-          'Equipa tu Energía Cósmica o entra en el Supervacío para demostrar que estás un paso más allá de tus enemigos. 🌌',
-          '❓ ¿Serás tú quien domine el cosmos?',
-          '#FelicesFiestas2025 #DulcesSueños',
-        ]
-      },
-      {
-        id: '2',
-        title: '¡LA #AGENDASEMANAL ESTÁ AQUÍ!',
-        excerpt: 'El campo de batalla se llena de ritmo invernal. ❄️...',
-        publishDate: '2025-12-25',
-        imageUrl: 'https://pbs.twimg.com/media/F6pW3vBW4AA5H5j?format=jpg&name=medium',
-        content: [
-          'Un invierno lleno de fuego llega a Free Fire.',
-        ]
-      }
-    ],
-    en: [],
-    pt: [],
-    ar: []
-  };
-  return (news[lang] && news[lang].length > 0) ? news[lang] : news['es'];
-};
-
-// Mantenemos MOCK_NEWS por compatibilidad, pero ahora es dinámico si se usa getNewsByLanguage
-export const MOCK_NEWS: NewsItem[] = getNewsByLanguage('es');
-
 export const TRANSLATIONS: Record<Language, TranslationSet> = {
   es: {
-    title: 'Elige tu idioma',
-    subtitle: 'Selecciona tu idioma preferido para usar FireSense Pro+',
-    selectButton: 'Seleccionar',
-    noticias: 'Noticias',
-    categorias: 'Categorías',
-    sensibilidades: 'Sensibilidades',
-    verTodas: 'Ver todas',
-    inicio: 'Inicio',
-    favoritos: 'Favoritos',
-    ajustes: 'Ajustes',
-    catSensibilidad: 'SENSIBILIDAD',
-    catArmas: 'ARMAS',
-    catHabilidades: 'HABILIDADES',
-    catGenerador: 'GENERADOR',
-    catHud: 'HUD',
-    catMascota: 'MASCOTA',
-    catPersonajes: 'PERSONAJES',
-    catSorteos: 'SORTEOS',
-    back: 'Volver',
-    hace: 'Hace',
-    dias: 'días',
-    hoy: 'Hoy mismo',
-    sensMenuDefault: 'SENSIBILIDADES',
-    sensMenuDefaultDesc: 'Lista de sensibilidades predeterminada.',
-    sensMenuPremium: 'PREMIUM',
-    sensMenuPremiumDesc: 'Lista de sensibilidades PREMIUM.',
-    sensMenuPlayers: 'SENSIBILIDADES DE JUGADORES',
-    sensMenuPlayersDesc: 'Comparte tu sensibilidad con otros jugadores aquí.',
-    premiumTitle: 'EMPIEZA COMO UN PROFESIONAL',
-    premiumSubtitle: 'Desbloquea todas las funciones',
-    premiumLabel: 'PREMIUM',
-    basicLabel: 'BÁSICO',
-    featDarkMode: 'Modo Oscuro',
-    featBasicSens: 'Sensibilidad Básica',
-    featInsaneSens: 'Sensibilidad Insana',
-    featUnlimitedGen: 'Generador Ilimitado',
-    featExclusiveSkills: 'Habilidades Exclusivas',
-    featNoAds: 'Sin anuncios',
-    premiumPrice: 'Suscríbete por solo US$ 2,99 /Mensual',
-    premiumBuy: 'COMPRA AHORA',
-    premiumDisclaimer: 'La suscripción se renovará automáticamente. Puedes cancelar en cualquier momento.',
-    raffleRulesTitle: 'Reglas del sorteo',
-    raffleRulesDesc: 'Si deseas participar en los sorteos y ser uno de los ganadores, debes seguir los siguientes pasos.',
-    raffleStep1: 'Debes tener un Ticket',
-    raffleStep2: 'Ingresa tu ID del juego',
-    raffleStep3: 'Síguenos en YouTube',
-    raffleTicketLabel: 'Ticket: 0',
-    raffleWatchAd: 'Ver anuncio x1 ticket',
-    raffleYoutubeDesc: '¡Asegúrate de suscribirte a nuestro canal de YouTube para aumentar tus posibilidades de ganar en el sorteo!',
-    raffleSubscribe: 'Suscríbete',
-    raffleIdPlaceholder: 'Ingrese su ID',
-    raffleParticipate: 'Participar',
-    raffleEnds: 'Finaliza:',
-    noFavoritesTitle: 'Aún no tienes favoritos',
-    noFavoritesDesc: 'Agrega tus sensibilidades favoritas aquí para acceder a ellas rápidamente.',
-    genUsingDpi: 'Configuración con {dpi} de DPI',
-    genNoDpi: 'Configuración Sin DPI',
-    genScreen: 'Pantalla: {res}',
-    genGeneral: 'General',
-    genRedDot: 'Mira de Punto Rojo',
-    gen2x: 'Mira 2x',
-    gen4x: 'Mira 4x',
-    genSniper: 'Mira Francotirador',
-    gen360: 'Cámara 360°',
-    genButton: 'Botón',
-    genDpi: 'DPI',
-    genCoins: 'Monedas',
-    genRegenerate: 'RE-GENERAR',
-    genSave: 'GUARDAR',
-    saveModalTitle: 'Guardar Configuración',
-    saveModalPlaceholder: 'Nombre de tu config...'
+    title: 'Elige tu idioma', subtitle: 'Selecciona tu idioma preferido para usar FireSense Pro+', selectButton: 'Seleccionar', noticias: 'Noticias', categorias: 'Categorías', sensibilidades: 'Sensibilidades', verTodas: 'Ver todas', inicio: 'Inicio', favoritos: 'Favoritos', ajustes: 'Ajustes', catSensibilidad: 'SENSIBILIDAD', catArmas: 'ARMAS', catHabilidades: 'HABILIDADES', catGenerador: 'GENERADOR', catHud: 'HUD', catMascota: 'MASCOTA', catPersonajes: 'PERSONAJES', catSorteos: 'SORTEOS', back: 'Volver', hace: 'Hace', dias: 'días', hoy: 'Hoy mismo', sensMenuDefault: 'SENSIBILIDADES', sensMenuDefaultDesc: 'Lista de sensibilidades predeterminada.', sensMenuPremium: 'PREMIUM', sensMenuPremiumDesc: 'Lista de sensibilidades PREMIUM.', sensMenuPlayers: 'SENSIBILIDADES DE JUGADORES', sensMenuPlayersDesc: 'Comparte tu sensibilidad con otros jugadores aquí.', searchPlaceholder: 'Buscar sensibilidad...', requestButton: 'Solicitar', nextUpdateInfo: 'Las sensibilidades se actualizan cada 2 meses automáticamente.', communityTitle: 'COMUNIDAD',
+    requestTitle: 'Solicitar Configuración', requestSubtitle: '¿No encuentras tu sensibilidad? Solicítala o actualízala aquí.', requestBrandLabel: 'Marca', requestModelLabel: 'Modelo', requestInfo: 'Si tu dispositivo no está en la lista, por favor coméntanos la marca y modelo exacto (por ejemplo, Samsung Galaxy S21). Esto nos ayudará a añadirlo rápidamente.', requestComment: 'Comentar', requestUpdateOpt: 'Actualizar la sensibilidad', requestPublishOpt: 'Publicar la sensibilidad', requestSubmit: 'Solicitar',
+    premiumTitle: 'EMPIEZA COMO UN PROFESIONAL', premiumSubtitle: 'Desbloquea todas las funciones', premiumLabel: 'PREMIUM', basicLabel: 'BÁSICO', featDarkMode: 'Modo Oscuro', featBasicSens: 'Sensibilidad Básica', featInsaneSens: 'Sensibilidad Insana', featUnlimitedGen: 'Generador Ilimitado', featExclusiveSkills: 'Habilidades Exclusivas', featNoAds: 'Sin anuncios', premiumPrice: 'Suscríbete por solo US$ 2,99 /Mensual', premiumBuy: 'COMPRA AHORA', premiumDisclaimer: 'La suscripción se renovará automáticamente. Puedes cancelar en cualquier momento.', raffleRulesTitle: 'Reglas del sorteo', raffleRulesDesc: 'Si deseas participar en los sorteos y ser uno de los ganadores, debes seguir los siguientes pasos.', raffleStep1: 'Debes tener un Ticket', raffleStep2: 'Ingresa tu ID del juego', raffleStep3: 'Síguenos en YouTube', raffleTicketLabel: 'Ticket: 0', raffleWatchAd: 'Ver anuncio x1 ticket', raffleYoutubeDesc: '¡Asegúrate de suscribirte a nuestro canal de YouTube para aumentar tus posibilidades de ganar en el sorteo!', raffleSubscribe: 'Suscríbete', raffleIdPlaceholder: 'Ingrese su ID', raffleParticipate: 'Participar', raffleEnds: 'Finaliza:', noFavoritesTitle: 'Aún no tienes favoritos', noFavoritesDesc: 'Agrega tus sensibilidades favoritas aquí para acceder a ellas rápidamente.', genUsingDpi: 'Configuración con {dpi} de DPI', genNoDpi: 'Configuración Sin DPI', genScreen: 'Pantalla: {res}', genGeneral: 'General', genRedDot: 'Mira de Punto Rojo', gen2x: 'Mira 2x', gen4x: 'Mira 4x', genSniper: 'Mira Francotirador', gen360: 'Cámara 360°', genButton: 'Botón', genDpi: 'DPI', genCoins: 'Monedas', genRegenerate: 'RE-GENERAR', genSave: 'GUARDAR', saveModalTitle: 'Guardar Configuración', saveModalPlaceholder: 'Nombre de tu config...'
   },
   en: {
-    title: 'Choose your language',
-    subtitle: 'Select your preferred language to use FireSense Pro+',
-    selectButton: 'Select',
-    noticias: 'News',
-    categorias: 'Categories',
-    sensibilidades: 'Sensitivities',
-    verTodas: 'See all',
-    inicio: 'Home',
-    favoritos: 'Favorites',
-    ajustes: 'Settings',
-    catSensibilidad: 'SENSITIVITY',
-    catArmas: 'WEAPONS',
-    catHabilidades: 'SKILLS',
-    catGenerador: 'GENERATOR',
-    catHud: 'HUD',
-    catMascota: 'PET',
-    catPersonajes: 'CHARACTERS',
-    catSorteos: 'RAFFLES',
-    back: 'Back',
-    hace: '',
-    dias: 'days ago',
-    hoy: 'Today',
-    sensMenuDefault: 'SENSITIVITIES',
-    sensMenuDefaultDesc: 'Default sensitivity list.',
-    sensMenuPremium: 'PREMIUM',
-    sensMenuPremiumDesc: 'PREMIUM sensitivity list.',
-    sensMenuPlayers: 'PLAYER SENSITIVITIES',
-    sensMenuPlayersDesc: 'Share your sensitivity with other players here.',
-    premiumTitle: 'START LIKE A PRO',
-    premiumSubtitle: 'Unlock all features',
-    premiumLabel: 'PREMIUM',
-    basicLabel: 'BASIC',
-    featDarkMode: 'Dark Mode',
-    featBasicSens: 'Basic Sensitivity',
-    featInsaneSens: 'Insane Sensitivity',
-    featUnlimitedGen: 'Unlimited Generator',
-    featExclusiveSkills: 'Exclusive Skills',
-    featNoAds: 'No Ads',
-    premiumPrice: 'Subscribe for only US$ 2.99 /Monthly',
-    premiumBuy: 'BUY NOW',
-    premiumDisclaimer: 'Subscription will renew automatically. You can cancel at any time.',
-    raffleRulesTitle: 'Raffle Rules',
-    raffleRulesDesc: 'If you want to participate in the raffles and be one of the winners, you must follow these steps.',
-    raffleStep1: 'You must have a Ticket',
-    raffleStep2: 'Enter your game ID',
-    raffleStep3: 'Follow us on YouTube',
-    raffleTicketLabel: 'Ticket: 0',
-    raffleWatchAd: 'Watch ad x1 ticket',
-    raffleYoutubeDesc: 'Make sure to subscribe to our YouTube channel to increase your chances of winning!',
-    raffleSubscribe: 'Subscribe',
-    raffleIdPlaceholder: 'Enter your ID',
-    raffleParticipate: 'Participate',
-    raffleEnds: 'Ends:',
-    noFavoritesTitle: 'No favorites yet',
-    noFavoritesDesc: 'Add your favorite sensitivities here to access them quickly.',
-    genUsingDpi: 'Config with {dpi} DPI',
-    genNoDpi: 'Config Without DPI',
-    genScreen: 'Screen: {res}',
-    genGeneral: 'General',
-    genRedDot: 'Red Dot Scope',
-    gen2x: '2x Scope',
-    gen4x: '4x Scope',
-    genSniper: 'Sniper Scope',
-    gen360: '360° Camera',
-    genButton: 'Button',
-    genDpi: 'DPI',
-    genCoins: 'Coins',
-    genRegenerate: 'RE-GENERATE',
-    genSave: 'SAVE',
-    saveModalTitle: 'Save Configuration',
-    saveModalPlaceholder: 'Name your config...'
+    title: 'Choose language', subtitle: 'Select preferred language', selectButton: 'Select', noticias: 'News', categorias: 'Categories', sensibilidades: 'Sensitivities', verTodas: 'See all', inicio: 'Home', favoritos: 'Favorites', ajustes: 'Settings', catSensibilidad: 'SENSITIVITY', catArmas: 'WEAPONS', catHabilidades: 'SKILLS', catGenerador: 'GENERATOR', catHud: 'HUD', catMascota: 'PET', catPersonajes: 'CHARACTERS', catSorteos: 'RAFFLES', back: 'Back', hace: '', dias: 'days ago', hoy: 'Today', sensMenuDefault: 'SENSITIVITIES', sensMenuDefaultDesc: 'Default sensitivities.', sensMenuPremium: 'PREMIUM', sensMenuPremiumDesc: 'PREMIUM sensitivities.', sensMenuPlayers: 'COMMUNITY', sensMenuPlayersDesc: 'Share with others.', searchPlaceholder: 'Search...', requestButton: 'Request', nextUpdateInfo: 'Sensitivities update every 2 months.', communityTitle: 'COMMUNITY',
+    requestTitle: 'Request Config', requestSubtitle: 'Request or update here.', requestBrandLabel: 'Brand', requestModelLabel: 'Model', requestInfo: 'Tell us the exact model.', requestComment: 'Comment', requestUpdateOpt: 'Update config', requestPublishOpt: 'Publish config', requestSubmit: 'Request',
+    premiumTitle: 'START LIKE A PRO', premiumSubtitle: 'Unlock all features', premiumLabel: 'PREMIUM', basicLabel: 'BASIC', featDarkMode: 'Dark Mode', featBasicSens: 'Basic Sens', featInsaneSens: 'Insane Sens', featUnlimitedGen: 'Unlimited Gen', featExclusiveSkills: 'Skills', featNoAds: 'No Ads', premiumPrice: 'Only US$ 2.99 /Month', premiumBuy: 'BUY NOW', premiumDisclaimer: 'Auto-renews.', raffleRulesTitle: 'Raffle Rules', raffleRulesDesc: 'Follow these steps.', raffleStep1: 'Need Ticket', raffleStep2: 'Enter ID', raffleStep3: 'Subscribe', raffleTicketLabel: 'Ticket: 0', raffleWatchAd: 'Watch ad', raffleYoutubeDesc: 'Subscribe to win!', raffleSubscribe: 'Subscribe', raffleIdPlaceholder: 'Enter ID', raffleParticipate: 'Participate', raffleEnds: 'Ends:', noFavoritesTitle: 'No favorites', noFavoritesDesc: 'Add your favorites.', genUsingDpi: 'Config with {dpi} DPI', genNoDpi: 'No DPI Config', genScreen: 'Screen: {res}', genGeneral: 'General', genRedDot: 'Red Dot', gen2x: '2x', gen4x: '4x', genSniper: 'Sniper', gen360: '360°', genButton: 'Button', genDpi: 'DPI', genCoins: 'Coins', genRegenerate: 'REGENERATE', genSave: 'SAVE', saveModalTitle: 'Save Config', saveModalPlaceholder: 'Name it...'
   },
   pt: {
-    title: 'Escolha seu idioma',
-    subtitle: 'Selecione seu idioma preferido para usar FireSense Pro+',
-    selectButton: 'Selecionar',
-    noticias: 'Notícias',
-    categorias: 'Categorias',
-    sensibilidades: 'Sensibilidades',
-    verTodas: 'Ver todas',
-    inicio: 'Início',
-    favoritos: 'Favoritos',
-    ajustes: 'Ajustes',
-    catSensibilidad: 'SENSIBILIDADE',
-    catArmas: 'ARMAS',
-    catHabilidades: 'HABILIDADES',
-    catGenerador: 'GERADOR',
-    catHud: 'HUD',
-    catMascota: 'PET',
-    catPersonajes: 'PERSONAGENS',
-    catSorteos: 'SORTEIOS',
-    back: 'Voltar',
-    hace: 'Há',
-    dias: 'dias',
-    hoy: 'Hoje',
-    sensMenuDefault: 'SENSIBILIDADES',
-    sensMenuDefaultDesc: 'Lista de sensibilidades padrão.',
-    sensMenuPremium: 'PREMIUM',
-    sensMenuPremiumDesc: 'Lista de sensibilidades PREMIUM.',
-    sensMenuPlayers: 'SENSIBILIDADES DE JUGADORES',
-    sensMenuPlayersDesc: 'Compartilhe sua sensibilidade com outros jogadores aqui.',
-    premiumTitle: 'COMECE COMO UM PROFISSIONAL',
-    premiumSubtitle: 'Desbloqueie todos os recursos',
-    premiumLabel: 'PREMIUM',
-    basicLabel: 'BÁSICO',
-    featDarkMode: 'Modo Oscuro',
-    featBasicSens: 'Sensibilidade Básica',
-    featInsaneSens: 'Sensibilidade Insana',
-    featUnlimitedGen: 'Gerador Ilimitado',
-    featExclusiveSkills: 'Habilidades Exclusivas',
-    featNoAds: 'Sem anúncios',
-    premiumPrice: 'Assine por apenas US$ 2,99 /Mensual',
-    premiumBuy: 'COMPRE AGORA',
-    premiumDisclaimer: 'A assinatura será renovada automaticamente. Você pode cancelar a qualquer momento.',
-    raffleRulesTitle: 'Regras do sorteio',
-    raffleRulesDesc: 'Se você deseja participar dos sorteios e ser um dos vencedores, deve seguir os seguintes passos.',
-    raffleStep1: 'Você deve ter um Ticket',
-    raffleStep2: 'Insira o seu ID do jogo',
-    raffleStep3: 'Siga-nos no YouTube',
-    raffleTicketLabel: 'Ticket: 0',
-    raffleWatchAd: 'Ver anúncio x1 ticket',
-    raffleYoutubeDesc: 'Não se esqueça de se inscrever no nosso canal do YouTube para aumentar suas chances de ganhar!',
-    raffleSubscribe: 'Inscrever-se',
-    raffleIdPlaceholder: 'Insira o seu ID',
-    raffleParticipate: 'Participar',
-    raffleEnds: 'Termina:',
-    noFavoritesTitle: 'Você ainda no tem favoritos',
-    noFavoritesDesc: 'Adicione suas sensibilidades favoritas aqui para acessá-las rápidamente.',
-    genUsingDpi: 'Configuração con {dpi} DPI',
-    genNoDpi: 'Configuração Sem DPI',
-    genScreen: 'Tela: {res}',
-    genGeneral: 'Geral',
-    genRedDot: 'Mira de Ponto Vermelho',
-    gen2x: 'Mira 2x',
-    gen4x: 'Mira 4x',
-    genSniper: 'Mira Sniper',
-    gen360: 'Câmera 360°',
-    genButton: 'Botão',
-    genDpi: 'DPI',
-    genCoins: 'Moedas',
-    genRegenerate: 'RE-GERAR',
-    genSave: 'SALVAR',
-    saveModalTitle: 'Salvar Configuração',
-    saveModalPlaceholder: 'Nome da sua config...'
+    title: 'Escolha o idioma', subtitle: 'Selecione o idioma', selectButton: 'Selecionar', noticias: 'Notícias', categorias: 'Categorias', sensibilidades: 'Sensibilidades', verTodas: 'Ver todas', inicio: 'Início', favoritos: 'Favoritos', ajustes: 'Ajustes', catSensibilidad: 'SENSIBILIDADE', catArmas: 'ARMAS', catHabilidades: 'HABILIDADES', catGenerador: 'GERADOR', catHud: 'HUD', catMascota: 'PET', catPersonajes: 'PERSONAGENS', catSorteos: 'SORTEIOS', back: 'Voltar', hace: 'Há', dias: 'dias', hoy: 'Hoje', sensMenuDefault: 'SENSIBILIDADES', sensMenuDefaultDesc: 'Lista padrão.', sensMenuPremium: 'PREMIUM', sensMenuPremiumDesc: 'Lista PREMIUM.', sensMenuPlayers: 'COMUNIDADE', sensMenuPlayersDesc: 'Compartilhe.', searchPlaceholder: 'Buscar...', requestButton: 'Solicitar', nextUpdateInfo: 'Atualizado a cada 2 meses.', communityTitle: 'COMUNIDADE',
+    requestTitle: 'Solicitar Config', requestSubtitle: 'Solicite aquí.', requestBrandLabel: 'Marca', requestModelLabel: 'Modelo', requestInfo: 'Diga o modelo exato.', requestComment: 'Comentar', requestUpdateOpt: 'Atualizar', requestPublishOpt: 'Publicar', requestSubmit: 'Solicitar',
+    premiumTitle: 'COMECE PRO', premiumSubtitle: 'Desbloqueie tudo', premiumLabel: 'PREMIUM', basicLabel: 'BÁSICO', featDarkMode: 'Modo Oscuro', featBasicSens: 'Sens Básica', featInsaneSens: 'Sens Insana', featUnlimitedGen: 'Gerador Ilimitado', featExclusiveSkills: 'Habilidades', featNoAds: 'Sem Ads', premiumPrice: 'US$ 2,99 /Mês', premiumBuy: 'COMPRE JÁ', premiumDisclaimer: 'Renovação auto.', raffleRulesTitle: 'Regras', raffleRulesDesc: 'Passos.', raffleStep1: 'Ticket', raffleStep2: 'ID Jogo', raffleStep3: 'YouTube', raffleTicketLabel: 'Ticket: 0', raffleWatchAd: 'Ver anúncio', raffleYoutubeDesc: 'Inscreva-se!', raffleSubscribe: 'Inscrever-se', raffleIdPlaceholder: 'ID', raffleParticipate: 'Participar', raffleEnds: 'Termina:', noFavoritesTitle: 'Sem favoritos', noFavoritesDesc: 'Adicione.', genUsingDpi: 'DPI {dpi}', genNoDpi: 'Sem DPI', genScreen: 'Tela: {res}', genGeneral: 'Geral', genRedDot: 'Red Dot', gen2x: '2x', gen4x: '4x', genSniper: 'Sniper', gen360: '360°', genButton: 'Botão', genDpi: 'DPI', genCoins: 'Coins', genRegenerate: 'GERAR', genSave: 'SALVAR', saveModalTitle: 'Salvar', saveModalPlaceholder: 'Nome...'
   },
   ar: {
-    title: 'اختر لغتك',
-    subtitle: 'اختر لغتك المفضلة لاستخدام FireSense Pro+',
-    selectButton: 'يختار',
-    noticias: 'أخبار',
-    categorias: 'فئات',
-    sensibilidades: 'الحساسيات',
-    verTodas: 'عرض الكل',
-    inicio: 'بداية',
-    favoritos: 'المفضلات',
-    ajustes: 'إعدادات',
-    catSensibilidad: 'حساسية',
-    catArmas: 'أسلحة',
-    catHabilidades: 'مهارات',
-    catGenerador: 'مولد',
-    catHud: 'HUD',
-    catMascota: 'حيwan أليف',
-    catPersonajes: 'شخصيات',
-    catSorteos: 'سحوبات',
-    back: 'خلف',
-    hace: 'منذ',
-    dias: 'أيام',
-    hoy: 'اليوم',
-    sensMenuDefault: 'الحساسيات',
-    sensMenuDefaultDesc: 'قائمة الحساسيات الافتراضية.',
-    sensMenuPremium: 'بريميوم',
-    sensMenuPremiumDesc: 'قائمة الحساسيات المميزة.',
-    sensMenuPlayers: 'حساسيات اللاعبين',
-    sensMenuPlayersDesc: 'شارك حساسيتك con لاعبين آخرين هنا.',
-    premiumTitle: 'ابدأ كالمحترفين',
-    premiumSubtitle: 'فتح جميع الميزات',
-    premiumLabel: 'المميزة',
-    basicLabel: 'أساسي',
-    featDarkMode: 'الوضع الداكن',
-    featBasicSens: 'الحساسية الأساسية',
-    featInsaneSens: 'حساسية جنونية',
-    featUnlimitedGen: 'مولد غير limitado',
-    featExclusiveSkills: 'مهارات حصرية',
-    featNoAds: 'بدون إعلانات',
-    premiumPrice: 'اشترك مقابل 2.99 دولارًا أمريكيًا فقط شهريًا',
-    premiumBuy: 'اشتر الآن',
-    premiumDisclaimer: 'سيتم تجديد الاشتراك تلقائيًا. يمكنك الإلغاء في أي وقت.',
-    raffleRulesTitle: 'قواعد السحب',
-    raffleRulesDesc: 'إذا كنت ترغب في المشاركة في السحوبات وتكون أحد الفائزين، فيجب عليك اتباع هذه الخطوات.',
-    raffleStep1: 'يجب أن يكون لديك تذكرة',
-    raffleStep2: 'أدخل معرف اللعبة الخاص بك',
-    raffleStep3: 'تابعنا على يوتيوب',
-    raffleTicketLabel: 'التذاكر: 0',
-    raffleWatchAd: 'مشاهدة الإعلان x1 تذكرة',
-    raffleYoutubeDesc: 'تأكد من الاشتراك في قناتنا على يوتيوب لزيادة فرصك في الفوز بالقرعة!',
-    raffleSubscribe: 'اشتراك',
-    raffleIdPlaceholder: 'أدخل هويتك',
-    raffleParticipate: 'مشاركة',
-    raffleEnds: 'ينتهي في:',
-    noFavoritesTitle: 'ليس لديك مفضلات بعد',
-    noFavoritesDesc: 'أضف حساسياتك المفضلة هنا للوصول إليها بسرعة.',
-    genUsingDpi: 'الإعداد مع {dpi} DPI',
-    genNoDpi: 'الإعداد بدون DPI',
-    genScreen: 'الشاشة: {res}',
-    genGeneral: 'عام',
-    genRedDot: 'نقطة حمراء',
-    gen2x: 'مكبر 2x',
-    gen4x: 'مكبر 4x',
-    genSniper: 'القناص',
-    gen360: 'كاميرا 360 درجة',
-    genButton: 'زر',
-    genDpi: 'DPI',
-    genCoins: 'عملات',
-    genRegenerate: 'إعادة التوليد',
-    genSave: 'حفظ',
-    saveModalTitle: 'حفظ الإعدادات',
-    saveModalPlaceholder: 'اسم الإعداد الخاص بك...'
+    title: 'اختر اللغة', subtitle: 'اختر لغتك', selectButton: 'اختيار', noticias: 'أخبار', categorias: 'فئات', sensibilidades: 'الحساسية', verTodas: 'عرض الكل', inicio: 'البداية', favoritos: 'المفضلة', ajustes: 'إعدادات', catSensibilidad: 'حساسية', catArmas: 'أسلحة', catHabilidades: 'مهارات', catGenerador: 'مولد', catHud: 'HUD', catMascota: 'حيوان', catPersonajes: 'شخصيات', catSorteos: 'سحوبات', back: 'عودة', hace: 'قبل', dias: 'أيام', hoy: 'اليوم', sensMenuDefault: 'الحساسيات', sensMenuDefaultDesc: 'القائمة الافتراضية', sensMenuPremium: 'بريميوم', sensMenuPremiumDesc: 'قائمة التميز', sensMenuPlayers: 'المجتمع', sensMenuPlayersDesc: 'شارك مع الآخرين', searchPlaceholder: 'بحث...', requestButton: 'طلب', nextUpdateInfo: 'يتم التحديث كل شهرين.', communityTitle: 'المجتمع',
+    requestTitle: 'طلب إعداد', requestSubtitle: 'اطلب هنا.', requestBrandLabel: 'ماركة', requestModelLabel: 'موديل', requestInfo: 'أخبرنا بالموديل الدقيق.', requestComment: 'تعليق', requestUpdateOpt: 'تحديث', requestPublishOpt: 'نشر', requestSubmit: 'طلب',
+    premiumTitle: 'ابدأ كالمحترفين', premiumSubtitle: 'افتح المزايا', premiumLabel: 'مميز', basicLabel: 'أساسي', featDarkMode: 'داكن', featBasicSens: 'أساسي', featInsaneSens: 'جنوني', featUnlimitedGen: 'غير محدود', featExclusiveSkills: 'مهارات', featNoAds: 'بدون إعلانات', premiumPrice: '2.99 دولار', premiumBuy: 'اشتر الآن', premiumDisclaimer: 'تجديد تلقائي', raffleRulesTitle: 'قواعد', raffleRulesDesc: 'اتبع الخطوات.', raffleStep1: 'تذكرة', raffleStep2: 'المعرف', raffleStep3: 'يوتيوب', raffleTicketLabel: 'تذكرة: 0', raffleWatchAd: 'شاهد إعلان', raffleYoutubeDesc: 'اشترك!', raffleSubscribe: 'اشتراك', raffleIdPlaceholder: 'المعرف', raffleParticipate: 'مشاركة', raffleEnds: 'ينتهي:', noFavoritesTitle: 'لا يوجد مفضلات', noFavoritesDesc: 'أضف مفضلاتك.', genUsingDpi: 'DPI {dpi}', genNoDpi: 'بدون DPI', genScreen: 'الشاشة: {res}', genGeneral: 'عام', genRedDot: 'نقطة حمراء', gen2x: '2x', gen4x: '4x', genSniper: 'قناص', gen360: '360°', genButton: 'زر', genDpi: 'DPI', genCoins: 'عملات', genRegenerate: 'إعادة', genSave: 'حفظ', saveModalTitle: 'حفظ', saveModalPlaceholder: 'الاسم...'
   }
+};
+
+/**
+ * FireSense Pro+ - Localized News Data
+ * Centralized repository for news items in multiple languages.
+ */
+export const NEWS_DATA: Record<Language, NewsItem[]> = {
+  es: [
+    { id: '1', title: 'Nueva Actualización 2026', excerpt: 'Descubre las nuevas funciones de optimización.', content: ['Hemos trabajado duro para traerte la mejor experiencia.', 'Ahora FireSense Pro+ es más rápido que nunca.'], publishDate: new Date().toISOString(), imageUrl: 'https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=500' },
+    { id: '2', title: 'Evento San Valentín', excerpt: 'Nuevas skins exclusivas disponibles.', content: ['No te pierdas el evento especial de febrero.'], publishDate: new Date().toISOString(), imageUrl: 'https://images.unsplash.com/photo-1518133910546-b6c2fb7d79e3?q=80&w=500' },
+  ],
+  en: [
+    { id: '1', title: 'New Update 2026', excerpt: 'Discover the new optimization features.', content: ['We have worked hard to bring you the best experience.', 'Now FireSense Pro+ is faster than ever.'], publishDate: new Date().toISOString(), imageUrl: 'https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=500' },
+    { id: '2', title: 'Valentine\'s Event', excerpt: 'New exclusive skins available.', content: ['Don\'t miss the special February event.'], publishDate: new Date().toISOString(), imageUrl: 'https://images.unsplash.com/photo-1518133910546-b6c2fb7d79e3?q=80&w=500' },
+  ],
+  pt: [
+    { id: '1', title: 'Nova Atualização 2026', excerpt: 'Descubra os novos recursos de otimização.', content: ['Trabalhamos muito para trazer a você a melhor experiência.', 'Agora o FireSense Pro+ está mais rápido do que nunca.'], publishDate: new Date().toISOString(), imageUrl: 'https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=500' },
+  ],
+  ar: [
+    { id: '1', title: 'تحديث جديد 2026', excerpt: 'اكتشف ميزات التحسين الجديدة.', content: ['لقد عملنا بجد لنقدم لك أفضل تجربة.'], publishDate: new Date().toISOString(), imageUrl: 'https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=500' },
+  ]
+};
+
+/**
+ * Returns news items for the specified language.
+ * Falls back to Spanish if the language is not found.
+ */
+export const getNewsByLanguage = (lang: Language): NewsItem[] => {
+  return NEWS_DATA[lang] || NEWS_DATA['es'];
 };

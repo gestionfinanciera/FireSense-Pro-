@@ -1,16 +1,42 @@
 
-import React from 'react';
-import { Language } from '../types';
+import React, { useState } from 'react';
+import { Language, DeviceSensitivity } from '../types';
 import { TRANSLATIONS } from '../constants';
+import DeviceListScreen from './DeviceListScreen';
+import DeviceSensitivityDetail from './DeviceSensitivityDetail';
+import RequestConfigScreen from './RequestConfigScreen';
 
 interface SensitivityMenuProps {
   language: Language;
   onBack: () => void;
+  communityConfigs: DeviceSensitivity[];
+  onPublishConfig: (device: DeviceSensitivity) => void;
 }
 
-const SensitivityMenu: React.FC<SensitivityMenuProps> = ({ language, onBack }) => {
+const SensitivityMenu: React.FC<SensitivityMenuProps> = ({ language, onBack, communityConfigs, onPublishConfig }) => {
   const text = TRANSLATIONS[language];
   const isArabic = language === 'ar';
+  const [view, setView] = useState<'menu' | 'defaults' | 'community' | 'request'>('menu');
+  const [selectedDevice, setSelectedDevice] = useState<DeviceSensitivity | null>(null);
+
+  if (selectedDevice) {
+    return <DeviceSensitivityDetail language={language} device={selectedDevice} onBack={() => setSelectedDevice(null)} />;
+  }
+
+  if (view === 'request') {
+    return <RequestConfigScreen language={language} onBack={() => setView('menu')} onPublish={onPublishConfig} />;
+  }
+
+  if (view === 'defaults' || view === 'community') {
+    return <DeviceListScreen 
+      language={language} 
+      isCommunity={view === 'community'}
+      communityConfigs={communityConfigs}
+      onBack={() => setView('menu')} 
+      onSelectDevice={setSelectedDevice} 
+      onRequest={() => setView('request')}
+    />;
+  }
 
   return (
     <div className="min-h-screen bg-[#f3f4f6] flex flex-col transition-colors duration-300" dir={isArabic ? 'rtl' : 'ltr'}>
@@ -25,7 +51,10 @@ const SensitivityMenu: React.FC<SensitivityMenuProps> = ({ language, onBack }) =
 
       <main className="p-6 space-y-4">
         <div className="grid grid-cols-2 gap-4">
-          <div className="bg-white rounded-2xl p-4 shadow-sm border border-gray-100 flex flex-col items-center text-center transition-all active:scale-95">
+          <button 
+            onClick={() => setView('defaults')}
+            className="bg-white rounded-2xl p-4 shadow-sm border border-gray-100 flex flex-col items-center text-center transition-all active:scale-95"
+          >
              <div className="w-16 h-16 bg-red-50 rounded-2xl flex items-center justify-center mb-4">
                 <svg className="w-8 h-8 text-[#FF1E1E]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
@@ -34,7 +63,7 @@ const SensitivityMenu: React.FC<SensitivityMenuProps> = ({ language, onBack }) =
              <h3 className="font-black text-xs text-gray-900 mb-2 uppercase tracking-tight">{text.sensMenuDefault}</h3>
              <div className="h-px w-full bg-gray-100 mb-3"></div>
              <p className="text-[10px] text-gray-500 font-medium leading-relaxed">{text.sensMenuDefaultDesc}</p>
-          </div>
+          </button>
 
           <div className="bg-white rounded-2xl p-4 shadow-sm border border-gray-100 flex flex-col items-center text-center transition-all active:scale-95">
              <div className="w-16 h-16 bg-yellow-50 rounded-2xl flex items-center justify-center mb-4">
@@ -48,7 +77,10 @@ const SensitivityMenu: React.FC<SensitivityMenuProps> = ({ language, onBack }) =
           </div>
         </div>
 
-        <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 flex flex-col items-center text-center transition-all active:scale-95">
+        <button 
+          onClick={() => setView('community')}
+          className="w-full bg-white rounded-2xl p-6 shadow-sm border border-gray-100 flex flex-col items-center text-center transition-all active:scale-95"
+        >
            <div className="w-20 h-20 bg-gray-50 rounded-full flex items-center justify-center mb-4 border-2 border-dashed border-gray-200">
               <svg className="w-10 h-10 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 011-1V4z" />
@@ -57,6 +89,12 @@ const SensitivityMenu: React.FC<SensitivityMenuProps> = ({ language, onBack }) =
            <h3 className="font-black text-sm text-gray-900 mb-2 uppercase tracking-tight">{text.sensMenuPlayers}</h3>
            <div className="h-px w-full bg-gray-100 mb-3"></div>
            <p className="text-xs text-gray-500 font-medium leading-relaxed px-4">{text.sensMenuPlayersDesc}</p>
+        </button>
+
+        <div className="bg-red-50 p-6 rounded-3xl border border-red-100 text-center">
+           <p className="text-[#FF1E1E] font-black text-xs uppercase tracking-widest leading-relaxed">
+             {text.nextUpdateInfo}
+           </p>
         </div>
       </main>
 

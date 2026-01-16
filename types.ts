@@ -12,6 +12,15 @@ export interface SensitivitySet {
   dpi: number | null;
 }
 
+export interface DeviceSensitivity extends SensitivitySet {
+  id: string;
+  brand: string;
+  model: string;
+  colorTag: string;
+  lastUpdated?: string;
+  isCommunity?: boolean;
+}
+
 export interface SavedConfig extends SensitivitySet {
   id: string;
   name: string;
@@ -35,6 +44,14 @@ export interface Pet {
   abilityName: string;
   description: string;
   abilityEffect: string;
+}
+
+export interface HudItem {
+  id: string;
+  title: string;
+  thumbnailUrl: string;
+  videoUrl: string;
+  fingers: number;
 }
 
 export interface TranslationSet {
@@ -66,6 +83,20 @@ export interface TranslationSet {
   sensMenuDefaultDesc: string;
   sensMenuPlayers: string;
   sensMenuPlayersDesc: string;
+  searchPlaceholder: string;
+  requestButton: string;
+  nextUpdateInfo: string;
+  communityTitle: string;
+  // Request Config Screen
+  requestTitle: string;
+  requestSubtitle: string;
+  requestBrandLabel: string;
+  requestModelLabel: string;
+  requestInfo: string;
+  requestComment: string;
+  requestUpdateOpt: string;
+  requestPublishOpt: string;
+  requestSubmit: string;
   // Premium Screen
   premiumTitle: string;
   premiumSubtitle: string;
